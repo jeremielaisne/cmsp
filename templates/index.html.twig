@@ -1,0 +1,144 @@
+{% extends 'base.html.twig' %}
+        
+{% block body %}
+	<!--begin::Main-->
+	<div class="d-flex flex-column flex-root">
+		<!--begin::Page-->
+		<div class="page d-flex flex-row flex-column-fluid">
+			<!--begin::Aside-->
+			<div id="kt_aside" class="aside bg-white" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_toggle">
+                <!--begin::Brand-->
+                <div class="aside-logo flex-column-auto pt-9 px-9" id="kt_aside_logo">
+                    <!--begin::Logo-->
+                    <a><h1>CMSP</h1></a>
+                    <!--end::Logo-->
+                </div>
+                <!--end::Brand-->
+				<!--begin::Aside menu-->
+                <div class="aside-menu flex-column-fluid px-3 px-lg-6">
+                    <!--begin::Aside Menu-->
+					<div class="menu-item">
+						<div class="menu-content">
+							<div class="separator mx-1 my-4"></div>
+						</div>
+					</div>
+                    <!--begin::Menu-->
+                    <div class="menu menu-column menu-pill menu-title-gray-600 menu-icon-gray-400 menu-state-primary menu-arrow-gray-500 menu-active-bg-primary fw-bold fs-5 my-5 mt-lg-2 mb-lg-0" id="kt_aside_menu" data-kt-menu="true">
+                        <div class="menu-item">
+							<a class="menu-link py-2" href="{{ path('dashboard_index')}}" title="Retour à la page d'accueil" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
+								<span class="menu-icon"><i class="fas fa-home"></i></span>
+								<span class="menu-title">Accueil</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<div class="h-30px"></div>
+						</div>
+						<div class="menu-item">
+							<h4 class="menu-content text-muted mb-0 fs-7 text-uppercase">Choix du thème</h4>
+						</div>
+						<div class="menu-item">
+							<a class="menu-link py-2" href="#" title="Choix du modèle pour le site web" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
+								<span class="menu-icon"><i class="fas fa-file-archive"></i></span>
+							    <span class="menu-title">Templates</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<div class="h-30px"></div>
+						</div>
+						<div class="menu-item">
+							<h4 class="menu-content text-muted mb-0 fs-7 text-uppercase">Gestion de contenu</h4>
+						</div>
+						<div class="menu-item">
+							<a class="menu-link py-2" title="Tableau de catégories" href="{{ path('contenu_categorie')}}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
+								<span class="menu-icon"><i class="fas fa-box-open"></i></span>
+								<span class="menu-title">Catégories</span>
+							</a>
+							<a class="menu-link py-2" title="Tableau de contenus" href="{{ path('contenu_index')}}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
+								<span class="menu-icon"><i class="far fa-file-alt"></i></span>
+								<span class="menu-title">Contenu</span>
+							</a>
+							<a class="menu-link py-2" title="Tableau de zone" href="{{ path('contenu_zone')}}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
+								<span class="menu-icon"><i class="fas fa-wallet"></i></span>
+								<span class="menu-title">Zones</span>
+							</a>
+							<a class="menu-link py-2" title="Choix du slider" href="{{ path('contenu_slider')}}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
+								<span class="menu-icon"><i class="fas fa-sliders-h"></i></span>
+								<span class="menu-title">Sliders</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<div class="h-30px"></div>
+						</div>
+						<div class="menu-item">
+							<h4 class="menu-content text-muted mb-0 fs-7 text-uppercase">Gestion de la documentation</h4>
+						</div>
+						<div class="menu-item">
+							<a class="menu-link py-2" title="Tableau des images" href="#" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
+								<span class="menu-icon"><i class="fas fa-images"></i></span>
+								<span class="menu-title">Images</span>
+							</a>
+							<a class="menu-link py-2" title="Choix des fichiers PDF" href="#" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
+								<span class="menu-icon"><i class="fas fa-file-pdf"></i></span>
+								<span class="menu-title">Fichiers PDF & Excel</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<div class="h-30px"></div>
+						</div>
+						<div class="menu-item">
+							<h4 class="menu-content text-muted mb-0 fs-7 text-uppercase">Gestion du SEO</h4>
+						</div>
+						<div class="menu-item">
+							<a class="menu-link" href="#" title="Gestion des urls" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
+								<span class="menu-icon"><i class="fas fa-link"></i></span>
+								<span class="menu-title">Urls & Liens canonique</span>
+							</a>
+							<a class="menu-link" href="#" title="Gestion des titres" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
+								<span class="menu-icon"><i class="fas fa-heading"></i></span>
+								<span class="menu-title">Title & description</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<div class="h-30px"></div>
+						</div>
+						<div class="menu-item">
+							<h4 class="menu-content text-muted mb-0 fs-7 text-uppercase">API</h4>
+						</div>
+						<div class="menu-item">
+							<a class="menu-link" href="#" title="Gestion des API" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
+								<span class="menu-icon"><i class="fas fa-link"></i></span>
+								<span class="menu-title">API</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<div class="menu-content">
+								<div class="separator mx-1 my-4"></div>
+							</div>
+						</div>
+						<div class="menu-item">
+							<a class="menu-link" href="#" title="Liste des utilisateurs" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
+								<span class="menu-icon"><i class="fas fa-users"></i></span>
+								<span class="menu-title">Utilisateurs</span>
+							</a>
+						</div>
+					</div>
+				</div>
+				<!--end::Menu-->
+			</div>
+			<!--end::Aside menu-->
+		    <!--begin::Wrapper-->
+            <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+                {% block header %}
+					{% include 'objects/header.html.twig' %}
+				{% endblock %}
+				<!--end::Wrapper-->
+				<!--begin::Content-->
+				<div class="content d-flex flex-column flex-column-fluid fs-6">
+				{% block contenu %}{% endblock %}
+				</div>
+				<!--end::Content-->
+            </div>
+        </div>
+		<!--end::Aside-->
+     </div>
+{% endblock %}
