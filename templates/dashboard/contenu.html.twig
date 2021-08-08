@@ -6,10 +6,32 @@
     <!--begin::About card-->
     <div class="card">
 		<!--begin::Body-->
-		<div class="card-body p-lg-17">
+        <form>
+		    <div class="card-body p-lg-17">
+                <div class="form-group p-2">
+                    <label for="contenu_categorie">Catégorie</label>
+                    <select id="contenu_categorie" class="form-control">
+                        <option value="valeur1">Valeur 1</option>
+                        <option value="valeur2" selected>Valeur 2</option>
+                        <option value="valeur3">Valeur 3</option>
+                    </select>
+                </div>
 
-		
-		</div>
+                <div class="form-group p-2">
+                    <label for="contenu_title">Title</label>
+                    <input id="contenu_title" type="text" class="form-control" name="contenu_title" />
+                </div>
+
+                <div class="form-group p-2">
+                    <label for="contenu_contenu">Contenu</label>
+                    <div id="editor" class="form-control" name="contenu_contenu"></div>
+                </div>
+
+                <div class="form-group p-2" style="float:right;">
+                    <button class="btn btn-success">Valider</button>
+                </div>
+		    </div>
+        </form>
         <!--end::Body-->
     </div>
     <!--end::About card-->

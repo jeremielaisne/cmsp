@@ -76,3 +76,9 @@ Thumbs.db
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+### fichiers locks
+package-lock.json
+composer.lock
+symfony.lock
+yarn.lock

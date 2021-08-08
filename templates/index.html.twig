@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-        
+								
 {% block body %}
 	<!--begin::Main-->
 	<div class="d-flex flex-column flex-root">
@@ -55,7 +55,7 @@
 							</a>
 							<a class="menu-link py-2" title="Tableau de contenus" href="{{ path('contenu_index')}}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
 								<span class="menu-icon"><i class="far fa-file-alt"></i></span>
-								<span class="menu-title">Contenu</span>
+								<span class="menu-title">Contenus</span>
 							</a>
 							<a class="menu-link py-2" title="Tableau de zone" href="{{ path('contenu_zone')}}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
 								<span class="menu-icon"><i class="fas fa-wallet"></i></span>
@@ -129,7 +129,10 @@
 		    <!--begin::Wrapper-->
             <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
                 {% block header %}
-					{% include 'objects/header.html.twig' %}
+					{% if page is not defined %}
+						{% set page = "NULL" %}
+					{% endif %}
+					{% include 'objects/header.html.twig' with {'page' : page} %}
 				{% endblock %}
 				<!--end::Wrapper-->
 				<!--begin::Content-->
@@ -141,4 +144,7 @@
         </div>
 		<!--end::Aside-->
      </div>
+{% endblock %}
+
+{% block scripts %}
 {% endblock %}

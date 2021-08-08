@@ -2,7 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Contenu;
+use App\Form\ContenuType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -15,8 +19,51 @@ class ContenuController extends AbstractController
      */
     public function index()
     {
-        $page = "Dashboard - Contenu";
+        $page = "Dashboard - Liste de contenus";
         return $this->render("dashboard/contenu.html.twig", ["page" => $page]);
+    }
+
+    /**
+     * @Route("/add-contenu", name="add_contenu")
+     */
+    public function add_contenu(Request $request) : Response
+    {
+        $page = "Dashboard - Ajout de contenus";
+
+        $contenu = new Contenu();
+
+        $form = $this->createForm(ContenuType::class, $contenu);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $task = $form->getData();
+
+            return $this->redirectToRoute('contenu_index');
+        }
+
+        return $this->render("dashboard/add-contenu.html.twig", [
+            "page" => $page,
+            "form" => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/edit-contenu", name="edit_contenu")
+     */
+    public function edit_contenu()
+    {
+        $page = "Dashboard - Modification de contenus";
+        return $this->render("dashboard/edit-contenu.html.twig", ["page" => $page]);
+    }
+
+    /**
+     * @Route("/delete-contenu", name="delete_contenu")
+     */
+    public function delete_contenu()
+    {
+        $page = "Dashboard - Suppression de contenus";
+        return $this->render("dashboard/delete-contenu.html.twig", ["page" => $page]);
     }
 
     /**
