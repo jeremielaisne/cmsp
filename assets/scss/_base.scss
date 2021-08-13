@@ -1,0 +1,32 @@
+::-moz-selection {
+    background: $selection-bg;
+    text-shadow: none;
+    color: $selection-color;
+}
+
+::selection {
+    background: $selection-bg;
+    text-shadow: none;
+    color: $selection-color;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}

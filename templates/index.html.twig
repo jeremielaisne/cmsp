@@ -49,7 +49,7 @@
 							<h4 class="menu-content text-muted mb-0 fs-7 text-uppercase">Gestion de contenu</h4>
 						</div>
 						<div class="menu-item">
-							<a class="menu-link py-2" title="Tableau de catégories" href="{{ path('contenu_categorie')}}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
+							<a class="menu-link py-2" title="Tableau de catégories" href="{{ path('categorie_index')}}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
 								<span class="menu-icon"><i class="fas fa-box-open"></i></span>
 								<span class="menu-title">Catégories</span>
 							</a>
@@ -57,11 +57,11 @@
 								<span class="menu-icon"><i class="far fa-file-alt"></i></span>
 								<span class="menu-title">Contenus</span>
 							</a>
-							<a class="menu-link py-2" title="Tableau de zone" href="{{ path('contenu_zone')}}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
+							<a class="menu-link py-2" title="Tableau de zone" href="{{ path('zone_index')}}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
 								<span class="menu-icon"><i class="fas fa-wallet"></i></span>
 								<span class="menu-title">Zones</span>
 							</a>
-							<a class="menu-link py-2" title="Choix du slider" href="{{ path('contenu_slider')}}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
+							<a class="menu-link py-2" title="Choix du slider" href="{{ path('slider_index')}}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
 								<span class="menu-icon"><i class="fas fa-sliders-h"></i></span>
 								<span class="menu-title">Sliders</span>
 							</a>
@@ -132,7 +132,7 @@
 					{% if page is not defined %}
 						{% set page = "NULL" %}
 					{% endif %}
-					{% include 'objects/header.html.twig' with {'page' : page} %}
+					{% include 'objects/header.html.twig' with {'title' : title} %}
 				{% endblock %}
 				<!--end::Wrapper-->
 				<!--begin::Content-->

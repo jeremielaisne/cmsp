@@ -5,8 +5,11 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Traits\TimestampTrait as Timestamp;
+use App\Traits\UserTrait as UserTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="zone")
@@ -15,6 +18,7 @@ use Doctrine\Common\Collections\Collection;
 class Zone 
 {
     use Timestamp;
+    use UserTrait;
 
     /**
      * @ORM\Column(type="integer")
@@ -24,11 +28,20 @@ class Zone
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\NotBlank
+     * @Assert\Length(min=3)
+     * @ORM\Column(type="string", length=255)
+     */
+    private $page;
+
+    /**
+     * @Assert\Length(min=3)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $libelle;
 
     /**
+     * @Assert\Length(min=3)
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $url;
@@ -47,6 +60,18 @@ class Zone
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getPage()
+    {
+        return $this->page;
+    }
+
+    public function setPage($page)
+    {
+        $this->page = $page;
+
+        return $this;
     }
     
     public function getLibelle()

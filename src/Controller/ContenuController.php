@@ -19,16 +19,22 @@ class ContenuController extends AbstractController
      */
     public function index()
     {
-        $page = "Dashboard - Liste de contenus";
-        return $this->render("dashboard/contenu.html.twig", ["page" => $page]);
+        $page = "app";
+        $title = "Dashboard - Liste de contenus";
+
+        return $this->render("dashboard/contenu/index.html.twig", [
+            "page" => $page,
+            "title" => $title
+        ]);
     }
 
     /**
-     * @Route("/add-contenu", name="add_contenu")
+     * @Route("/add", name="add")
      */
-    public function add_contenu(Request $request) : Response
+    public function add(Request $request) : Response
     {
-        $page = "Dashboard - Ajout de contenus";
+        $page = "app";
+        $title = "Dashboard - Ajout de contenus";
 
         $contenu = new Contenu();
 
@@ -42,54 +48,38 @@ class ContenuController extends AbstractController
             return $this->redirectToRoute('contenu_index');
         }
 
-        return $this->render("dashboard/add-contenu.html.twig", [
+        return $this->render("dashboard/contenu/add.html.twig", [
             "page" => $page,
+            "title" => $title,
             "form" => $form->createView()
         ]);
     }
 
     /**
-     * @Route("/edit-contenu", name="edit_contenu")
+     * @Route("/edit", name="edit")
      */
-    public function edit_contenu()
+    public function edit()
     {
-        $page = "Dashboard - Modification de contenus";
-        return $this->render("dashboard/edit-contenu.html.twig", ["page" => $page]);
+        $page = "app";
+        $title = "Dashboard - Modification de contenus";
+
+        return $this->render("dashboard/contenu/edit.html.twig", [
+            "page" => $page,
+            "title" => $title
+        ]);
     }
 
     /**
-     * @Route("/delete-contenu", name="delete_contenu")
+     * @Route("/delete", name="delete")
      */
-    public function delete_contenu()
+    public function delete()
     {
-        $page = "Dashboard - Suppression de contenus";
-        return $this->render("dashboard/delete-contenu.html.twig", ["page" => $page]);
-    }
+        $page = "app";
+        $title = "Dashboard - Suppression de contenus";
 
-    /**
-     * @Route("/categorie", name="categorie")
-     */
-    public function categorie()
-    {
-        $page = "Dashboard - Catégorie";
-        return $this->render("dashboard/categorie.html.twig", ["page" => $page]);
-    }
-
-    /**
-     * @Route("/zone", name="zone")
-     */
-    public function zone()
-    {
-        $page = "Dashboard - Zone";
-        return $this->render("dashboard/zone.html.twig", ["page" => $page]);
-    }
-
-    /**
-     * @Route("/slider", name="slider")
-     */
-    public function slider()
-    {
-        $page = "Dashboard - Sliders";
-        return $this->render("dashboard/slider.html.twig", ["page" => $page]);
+        return $this->render("dashboard/contenu/delete.html.twig", [
+            "page" => $page,
+            "title" => $title
+        ]);
     }
 }

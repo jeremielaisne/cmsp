@@ -3,6 +3,7 @@
         "@symfony/stimulus-bridge": "^2.0.0",
         "@symfony/webpack-encore": "^1.5.0",
         "core-js": "^3.0.0",
+        "css-loader": "^5.2.7",
         "file-loader": "^6.0.0",
         "regenerator-runtime": "^0.13.2",
         "sass": "^1.36.0",
@@ -20,7 +21,8 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-free": "^5.15.3",
-        "ckeditor": "^4.12.1"
+        "@fortawesome/fontawesome-free": "^5.15.4",
+        "ckeditor": "^4.12.1",
+        "datatables": "^1.10.18"
     }
 }

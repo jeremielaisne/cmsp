@@ -1,0 +1,32 @@
+{% extends 'index.html.twig' %}
+
+{% block contenu %}
+<!--begin::Container-->
+<div class="container" id="kt_content_container">
+    <!--begin::About card-->
+    <div class="card p-15">
+		<!--begin::Body-->
+        {# templates/dashboard/add-contenu.html.twig #}
+        {{ form_start(form) }}
+            {{ form_errors(form) }}
+
+            <div class="pb-5">
+                {{ form_row(form.categories)}}
+            </div>
+            <div class="pb-5">
+                {{ form_row(form.titre)}}
+            </div>
+            <div class="pb-5">
+                {{ form_row(form.texte)}}
+            </div>
+            <div class="pb-5 float-end">
+                {{ form_row(form.save, {'label' : 'Ajouter'})}}
+            </div>
+
+            {{ form_rest(form) }} 
+        <!--end::Body-->
+    </div>
+    <!--end::About card-->
+</div>
+<!--end::Container-->
+{% endblock %}

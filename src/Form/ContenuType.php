@@ -20,9 +20,9 @@ class ContenuType extends AbstractType
     {
         $builder
             ->add('categories')
-            ->add('titre', TextType::class, [])
+            ->add('titre', TextType::class)
             ->add('texte', CKEditorType::class)
-            ->add('save', SubmitType::class, [])
+            ->add('save', SubmitType::class)
         ;
     }
 

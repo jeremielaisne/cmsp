@@ -1,0 +1,36 @@
+{% extends 'index.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/zone.css') }}">
+{% endblock %}
+
+{% block contenu %}
+<!--begin::Container-->
+<div class="container" id="kt_content_container">
+    <!--begin::About card-->
+    <div class="card p-15">
+		<!--begin::Body-->
+        {# templates/dashboard/add-contenu.html.twig #}
+        {{ form_start(form) }}
+            {{ form_errors(form) }}
+
+            <div class="pb-5">
+                {{ form_row(form.page)}}
+            </div>
+            <div class="pb-5">
+                {{ form_row(form.libelle)}}
+            </div>
+            <div class="pb-5">
+                {{ form_row(form.url)}}
+            </div>
+            <div class="pb-5 float-end">
+                {{ form_row(form.save, {'label' : 'Ajouter'})}}
+            </div>
+
+            {{ form_rest(form) }} 
+        <!--end::Body-->
+    </div>
+    <!--end::About card-->
+</div>
+<!--end::Container-->
+{% endblock %}

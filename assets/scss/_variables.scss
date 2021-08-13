@@ -1,0 +1,157 @@
+
+// Colors
+// ---------------
+
+$body-color:                  #000000;
+$primary:                     #f58540;
+
+$selection-bg:                #dddddd;
+$selection-color:             #212529;
+
+
+// Fonts
+// ---------------
+
+$font-base-name:                    "Rajdhani";
+$font-base-directory:               "/build/fonts";
+$font-family-sans-serif:            "Rajdhani-Regular", Helvetica, Arial, serif;
+$font-family-base:                  $font-family-sans-serif;
+
+$font-family-sans-serif-medium:     "Rajdhani-Medium", Helvetica, Arial, serif;
+$font-family-sans-serif-semibold:   "Rajdhani-SemiBold", Helvetica, Arial, serif;
+$font-family-sans-serif-bold:       "Rajdhani-Bold", Helvetica, Arial, serif;
+
+$font-size-base:              1rem; // 16px
+$line-height-base:            1.5; // 24px
+
+$h1-font-size:                $font-size-base * 2.5;
+$h2-font-size:                $font-size-base * 2.2; 
+$h3-font-size:                $font-size-base * 1.85;
+$h4-font-size:                $font-size-base * 1.45; 
+$h5-font-size:                $font-size-base * 1.125;
+$h6-font-size:                $font-size-base;
+
+$headings-font-family:        "Rajdhani-Medium", Helvetica, Arial, serif;
+$headings-font-weight:        400;
+$headings-margin-bottom:      2rem;
+$headings-color:              $body-color;
+
+
+// Grid
+// ---------------
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1460px
+);
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1400px
+);
+
+$grid-columns:      12;
+$grid-gutter-width: 30px;
+
+
+// Spacers
+// ---------------
+
+$spacer: 1rem;
+$spacers: ();
+
+$spacers: map-merge(
+  (
+    0: 0,
+    1: ($spacer * .25),
+    2: ($spacer * .5),
+    3: $spacer *.75,
+    4: ($spacer * 1),
+    5: ($spacer * 1.25),
+    6: ($spacer * 1.5),
+    7: ($spacer * 1.75),
+    8: $spacer * 2,
+    9: ($spacer * 2.25),
+    10: ($spacer * 2.5),
+    11: ($spacer * 2.75),
+    12: ($spacer * 3),
+    13: ($spacer * 3.25),
+    14: ($spacer * 3.5),
+    15: ($spacer * 3.75),
+    16: ($spacer * 4),
+    17: ($spacer * 4.25),
+    18: ($spacer * 4.5),
+    19: ($spacer * 4.75),
+    20: ($spacer * 5),
+  ),
+  $spacers
+);
+
+
+// Forms
+// ---------------
+
+$form-group-margin-bottom:  .5rem;
+
+
+// Buttons
+// ---------------
+
+$btn-padding-y:         .95rem;
+$btn-padding-x:         2.25rem;
+
+$btn-line-height:       1.25rem;
+
+
+// Components
+// ---------------
+
+$border-radius:        0;
+$border-radius-lg:     0;
+$border-radius-sm:     0;
+
+
+// Breadcrumb
+// ---------------
+
+$breadcrumb-divider: quote(">");
+$breadcrumb-bg: transparent;
+$breadcrumb-color: $body-color;
+$breadcrumb-active-color: $primary;
+
+
+// Tables
+// ---------------
+
+$table-cell-padding:          .65rem 1rem;
+$table-color:                 $body-color;
+
+$table-border-width:          1px;
+$table-border-color:          #eee;
+
+$table-head-bg:               #F5F5F5;
+$table-head-color:            $body-color;
+
+
+$pretty--color-primary: $primary;
+
+
+
+// Checkboxes
+// ---------------
+
+$pretty--color-default:#64a23c;
+
+
+// Modals
+// ---------------
+
+$modal-inner-padding:         1.5rem;
+$modal-lg:                    1200px;
+$modal-md:                    720px;
+$modal-sm:                    300px;

@@ -6,21 +6,18 @@
         <title>{% block title %}CMSP{% endblock %}</title>
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            <meta name="description" content="CMS Personnel, modification de contenus, bonne pratique SEO, gestion de documents" />
-            <meta name="keywords" content="Personnel, modification de contenus, bonne pratique SEO, gestion de documents" />
-            {# <link rel="canonical" href="Https://preview.keenthemes.com/rider-free" /> #}
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <link rel="shortcut icon" href="/assets/media/logos/favicon.ico" />
-            <!--begin::Fonts-->
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" />
-            <!--end::Fonts-->
-            <!--begin::Global Stylesheets Bundle(used by all pages)-->
-            <link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-            <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-            <!--end::Global Stylesheets Bundle-->
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
+        {% if page is defined %}
+            {{ encore_entry_link_tags(page) }}
+        {% endif %}
+        <meta name="description" content="CMS Personnel, modification de contenus, bonne pratique SEO, gestion de documents" />
+        <meta name="keywords" content="Personnel, modification de contenus, bonne pratique SEO, gestion de documents" />
+        {# <link rel="canonical" href="Https://preview.keenthemes.com/rider-free" /> #}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="shortcut icon" href="/assets/media/logos/favicon.ico" />
+        <!--begin::Fonts-->
+        {# <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" /> #}
+        <!--end::Fonts-->
+        {% block stylesheets %}{% endblock %}
 
         {% block javascripts %}
             {#{{ encore_entry_script_tags('app') }}#}
@@ -34,9 +31,9 @@
             <script src="/assets/js/custom/widgets.js"></script>
 
 			<!-- Our project just needs Font Awesome solid + brand -->
-            <script defer src="/node_modules/@fortawesome/fontawesome-free/js/brands.js"></script>
-            <script defer src="/node_modules/@fortawesome/fontawesome-free/js/solid.js"></script>
-            <script defer src="/node_modules/@fortawesome/fontawesome-free/js/fontawesome.min.js"></script>
+            <script defer src="/assets/fontawesome/js/brands.js"></script>
+            <script defer src="/assets/fontawesome/js/solid.js"></script>
+            <script defer src="/assets/fontawesome/js/fontawesome.min.js"></script>
             <!--end::Page Custom Javascript-->
             <!--end::Javascript-->
         {% endblock %}

@@ -1,0 +1,24 @@
+label.error {
+    font-size: .9rem;
+    display: block;
+    width: 100%;
+    padding: .35rem 0;
+    color: #bc2f2f;
+}
+
+.fancybox-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+@keyframes rotating {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .rotating {
+    animation: rotating 1.5s linear infinite;
+  }
