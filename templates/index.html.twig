@@ -6,24 +6,24 @@
 		<!--begin::Page-->
 		<div class="page d-flex flex-row flex-column-fluid">
 			<!--begin::Aside-->
-			<div id="kt_aside" class="aside bg-white" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_toggle">
+			<div id="kt_aside" class="aside bg-primary" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_toggle">
                 <!--begin::Brand-->
-                <div class="aside-logo flex-column-auto pt-9 px-9" id="kt_aside_logo">
+                <div class="aside-logo flex-column-auto pt-9 px-8" id="kt_aside_logo">
                     <!--begin::Logo-->
-                    <a><h1>CMSP</h1></a>
+                    <a><h1 class="symbol symbol-25px"><img src="/assets/media/logos/logo.png"/> CMS-MCLAREN</h1></a>
                     <!--end::Logo-->
                 </div>
                 <!--end::Brand-->
 				<!--begin::Aside menu-->
-                <div class="aside-menu flex-column-fluid px-3 px-lg-6">
+                <div class="aside-menu flex-column-fluid px-3 px-lg-2">
                     <!--begin::Aside Menu-->
 					<div class="menu-item">
 						<div class="menu-content">
-							<div class="separator mx-1 my-4"></div>
+							<div class="separator my-2"></div>
 						</div>
 					</div>
                     <!--begin::Menu-->
-                    <div class="menu menu-column menu-pill menu-title-gray-600 menu-icon-gray-400 menu-state-primary menu-arrow-gray-500 menu-active-bg-primary fw-bold fs-5 my-5 mt-lg-2 mb-lg-0" id="kt_aside_menu" data-kt-menu="true">
+                    <div class="menu menu-column menu-pill menu-primary menu-state-primary menu-active-bg-primary fw-bold fs-8" id="kt_aside_menu" data-kt-menu="true">
                         <div class="menu-item">
 							<a class="menu-link py-2" href="{{ path('dashboard_index')}}" title="Retour à la page d'accueil" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
 								<span class="menu-icon"><i class="fas fa-home"></i></span>
@@ -31,10 +31,10 @@
 							</a>
 						</div>
 						<div class="menu-item">
-							<div class="h-30px"></div>
+							<div class="h-20px"></div>
 						</div>
 						<div class="menu-item">
-							<h4 class="menu-content text-muted mb-0 fs-7 text-uppercase">Choix du thème</h4>
+							<h4 class="menu-content mb-0 fs-7 text-uppercase">Choix du thème</h4>
 						</div>
 						<div class="menu-item">
 							<a class="menu-link py-2" href="#" title="Choix du modèle pour le site web" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
@@ -43,18 +43,18 @@
 							</a>
 						</div>
 						<div class="menu-item">
-							<div class="h-30px"></div>
+							<div class="h-20px"></div>
 						</div>
 						<div class="menu-item">
-							<h4 class="menu-content text-muted mb-0 fs-7 text-uppercase">Gestion de contenu</h4>
+							<h4 class="menu-content mb-0 fs-7 text-uppercase">Gestion de contenu</h4>
 						</div>
 						<div class="menu-item">
 							<a class="menu-link py-2" title="Tableau de catégories" href="{{ path('categorie_index')}}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
-								<span class="menu-icon"><i class="fas fa-box-open"></i></span>
+								<span class="menu-icon"><i class="fas fa-wallet"></i></span>
 								<span class="menu-title">Catégories</span>
 							</a>
 							<a class="menu-link py-2" title="Tableau de contenus" href="{{ path('contenu_index')}}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
-								<span class="menu-icon"><i class="far fa-file-alt"></i></span>
+								<span class="menu-icon"><i class="fas fa-box-open"></i></span>
 								<span class="menu-title">Contenus</span>
 							</a>
 							<a class="menu-link py-2" title="Tableau de zone" href="{{ path('zone_index')}}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
@@ -67,10 +67,10 @@
 							</a>
 						</div>
 						<div class="menu-item">
-							<div class="h-30px"></div>
+							<div class="h-20px"></div>
 						</div>
 						<div class="menu-item">
-							<h4 class="menu-content text-muted mb-0 fs-7 text-uppercase">Gestion de la documentation</h4>
+							<h4 class="menu-content mb-0 fs-7 text-uppercase">Gestion de la documentation</h4>
 						</div>
 						<div class="menu-item">
 							<a class="menu-link py-2" title="Tableau des images" href="#" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
@@ -83,26 +83,22 @@
 							</a>
 						</div>
 						<div class="menu-item">
-							<div class="h-30px"></div>
+							<div class="h-20px"></div>
 						</div>
 						<div class="menu-item">
-							<h4 class="menu-content text-muted mb-0 fs-7 text-uppercase">Gestion du SEO</h4>
+							<h4 class="menu-content mb-0 fs-7 text-uppercase">Gestion du SEO</h4>
 						</div>
 						<div class="menu-item">
 							<a class="menu-link" href="#" title="Gestion des urls" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
 								<span class="menu-icon"><i class="fas fa-link"></i></span>
 								<span class="menu-title">Urls & Liens canonique</span>
 							</a>
-							<a class="menu-link" href="#" title="Gestion des titres" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
-								<span class="menu-icon"><i class="fas fa-heading"></i></span>
-								<span class="menu-title">Title & description</span>
-							</a>
 						</div>
 						<div class="menu-item">
-							<div class="h-30px"></div>
+							<div class="h-20px"></div>
 						</div>
 						<div class="menu-item">
-							<h4 class="menu-content text-muted mb-0 fs-7 text-uppercase">API</h4>
+							<h4 class="menu-content mb-0 fs-7 text-uppercase">API</h4>
 						</div>
 						<div class="menu-item">
 							<a class="menu-link" href="#" title="Gestion des API" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-bs-original-title="#">
@@ -112,7 +108,7 @@
 						</div>
 						<div class="menu-item">
 							<div class="menu-content">
-								<div class="separator mx-1 my-4"></div>
+								<div class="separator my-2"></div>
 							</div>
 						</div>
 						<div class="menu-item">
@@ -129,14 +125,14 @@
 		    <!--begin::Wrapper-->
             <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
                 {% block header %}
-					{% if page is not defined %}
-						{% set page = "NULL" %}
+					{% if title is not defined %}
+						{% set title = "NULL" %}
 					{% endif %}
 					{% include 'objects/header.html.twig' with {'title' : title} %}
 				{% endblock %}
 				<!--end::Wrapper-->
 				<!--begin::Content-->
-				<div class="content d-flex flex-column flex-column-fluid fs-6">
+				<div class="content d-flex flex-column flex-column-fluid fs-8">
 				{% block contenu %}{% endblock %}
 				</div>
 				<!--end::Content-->
@@ -146,5 +142,4 @@
      </div>
 {% endblock %}
 
-{% block scripts %}
-{% endblock %}
+{% block scripts %}{% endblock %}

@@ -1,10 +1,10 @@
-{% extends 'index.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block contenu %}
+{% block body %}
 <!--begin::Container-->
-<div class="container" id="kt_content_container">
+<div id="kt_content_container" class="fs-7 p-15">
     <!--begin::About card-->
-    <div class="card p-15">
+    <div class="card p-5">
 		<!--begin::Body-->
         {# templates/dashboard/add-contenu.html.twig #}
         {{ form_start(form) }}
@@ -27,6 +27,27 @@
         <!--end::Body-->
     </div>
     <!--end::About card-->
+    <div id="progressbar"></div>
 </div>
 <!--end::Container-->
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        {# var line = new ProgressBar.Line(container, {
+            strokeWidth: 2,
+            easing: 'easeInOut',
+            duration: 5000,
+            color: '#FFEA82',
+            trailColor: '#eee',
+            trailWidth: 1,
+            svgStyle: {width: '100%', height: '100%'},
+            from: {color: '#FFEA82'},
+            to: {color: '#ED6A5A'},
+            step: (state, bar) => {
+              bar.path.setAttribute('stroke', state.color);
+            }
+        });
+        line.animate(1.0); #}
+    </script>
 {% endblock %}

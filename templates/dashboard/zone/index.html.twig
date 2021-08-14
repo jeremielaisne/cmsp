@@ -1,18 +1,30 @@
 {% extends 'index.html.twig' %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('build/zone.css') }}">
-{% endblock %}
-
 {% block contenu %}
 <!--begin::Container-->
 <div class="container" id="kt_content_container">
     <!--begin::About card-->
     <div class="card">
 		<!--begin::Body-->
+        <a class="modal-open-add btn btn-success">Ajouter</a>
+        <a class="modal-open-edit btn btn-secondary">Editer</a>
         <!--end::Body-->
     </div>
     <!--end::About card-->
 </div>
 <!--end::Container-->
+
+{% include './objects/modal.html.twig' with {'modal_path':'/zone/add', 'action': 'add'} %}
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(".modal-open-add").on("click", function(){
+            MicroModal.show("modal-add");
+        })
+        $(".modal__close").on("click", function(){
+            MicroModal.close("modal-add");
+        })
+    </script>
 {% endblock %}

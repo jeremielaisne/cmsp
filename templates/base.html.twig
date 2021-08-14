@@ -6,9 +6,6 @@
         <title>{% block title %}CMSP{% endblock %}</title>
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
-        {% if page is defined %}
-            {{ encore_entry_link_tags(page) }}
-        {% endif %}
         <meta name="description" content="CMS Personnel, modification de contenus, bonne pratique SEO, gestion de documents" />
         <meta name="keywords" content="Personnel, modification de contenus, bonne pratique SEO, gestion de documents" />
         {# <link rel="canonical" href="Https://preview.keenthemes.com/rider-free" /> #}
@@ -18,10 +15,16 @@
         {# <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" /> #}
         <!--end::Fonts-->
         {% block stylesheets %}{% endblock %}
-
+        {% if page is defined %}
+            {{ encore_entry_link_tags(page) }}
+        {% endif %}
+    </head>
+    <body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed aside-fixed">
+        <!--end::Head-->
+	    <!--begin::Body-->
+        {% block body %}{% endblock %}
+        <!--end::Body-->
         {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-
             <!--begin::Javascript-->
             <!--begin::Global Javascript Bundle(used by all pages)-->
             <script src="/assets/plugins/global/plugins.bundle.js"></script>
@@ -36,16 +39,10 @@
             <script defer src="/assets/fontawesome/js/fontawesome.min.js"></script>
             <!--end::Page Custom Javascript-->
             <!--end::Javascript-->
+            {% if page is defined %}
+                {{ encore_entry_script_tags(page) }}
+            {% endif %}
         {% endblock %}
-    </head>
-    <body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed aside-fixed">
-        <!--end::Head-->
-	    <!--begin::Body-->
-        {% block body %}
-		
-        {% endblock %}
-        <!--end::Body-->
-        {% block scripts %}
-        {% endblock %}
+        {% block scripts %}{% endblock %}
     </body>
 </html>

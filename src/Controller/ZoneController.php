@@ -21,7 +21,7 @@ class ZoneController extends AbstractController
     public function index()
     {
         $page = "zone";
-        $title = "Dashboard - Liste des Zones";
+        $title = "Gestion des Zones";
 
         return $this->render("dashboard/zone/index.html.twig", [
             "page" => $page,
@@ -35,7 +35,7 @@ class ZoneController extends AbstractController
     public function add(Request $request) : Response
     {
         $page = "zone";
-        $title = "Dashboard - Ajout d'une zone";
+        $title = "Gestion des Zones";
 
         $zone = new Zone();
 
@@ -71,7 +71,7 @@ class ZoneController extends AbstractController
     public function edit()
     {
         $page = "zone";
-        $title = "Dashboard - Modification de zones";
+        $title = "Gestion des Zones";
 
         return $this->render("dashboard/zone/edit.html.twig", [
             "page" => $page,
@@ -85,7 +85,7 @@ class ZoneController extends AbstractController
     public function delete()
     {
         $page = "zone";
-        $title = "Dashboard - Suppression de zones";
+        $title = "Gestion des Zones";
 
         return $this->render("dashboard/zone/delete.html.twig", [
             "page" => $page,

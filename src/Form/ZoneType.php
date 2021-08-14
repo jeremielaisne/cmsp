@@ -52,7 +52,9 @@ class ZoneType extends AbstractType
                 // TO DO : Vérifier les doublons
             })
             
-            ->add('save', SubmitType::class)
+            ->add('save', SubmitType::class, [
+                "attr" => ["class" => "btn btn-success fs-7 p-3 m-1"]
+            ])
         ;
 
     }

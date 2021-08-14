@@ -6,14 +6,18 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
-import './scss/app.scss';
+import './app.scss';
 
 // start the Stimulus application
 import './bootstrap';
 
 class App {
 
-    constructor() {}
+    constructor(options) {
+        let defaults = {};
+
+        let _options = {...defaults, ...options};
+    }
 
     init() {
 

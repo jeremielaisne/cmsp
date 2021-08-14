@@ -2,19 +2,36 @@
 // Colors
 // ---------------
 
-$body-color:                  #000000;
+$body-color:                  #FEFAF4;
 $primary:                     #f58540;
+
+$secondary:                   #001a8b;
+$light:                       #F5F8FA;
+$success:                     #50CD89;
+$info:                        #7239EA;
+$warning:                     #FFC700;
+$danger:                      #F1416C;
+$dark:                        #181C32;
 
 $selection-bg:                #dddddd;
 $selection-color:             #212529;
+
+$text-primary:                  $dark;
+$text-secondary:                $light;
 
 
 // Fonts
 // ---------------
 
+@font-face {
+  font-family: 'Rajdhani';
+  src: url("../fonts/Rajdhani/Rajdhani-Medium.ttf") format('truetype');
+}
+
 $font-base-name:                    "Rajdhani";
 $font-base-directory:               "/build/fonts";
-$font-family-sans-serif:            "Rajdhani-Regular", Helvetica, Arial, serif;
+$font-family-name:                  "Rajdhani","Segoe UI", Helvetica, Roboto;
+$font-family-sans-serif:            "Rajdhani-Regular", 'Segoe UI', Helvetica, Arial, serif;
 $font-family-base:                  $font-family-sans-serif;
 
 $font-family-sans-serif-medium:     "Rajdhani-Medium", Helvetica, Arial, serif;

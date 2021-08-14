@@ -1,14 +1,11 @@
-{% extends 'index.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('build/zone.css') }}">
-{% endblock %}
-
-{% block contenu %}
+{% block body %}
 <!--begin::Container-->
-<div class="container" id="kt_content_container">
+<div id="kt_zone_container" class="fs-7 p-5">
     <!--begin::About card-->
-    <div class="card p-15">
+    <div class="card p-5">
+        <h4>Ajout d'une zone</h4>
 		<!--begin::Body-->
         {# templates/dashboard/add-contenu.html.twig #}
         {{ form_start(form) }}
@@ -23,14 +20,36 @@
             <div class="pb-5">
                 {{ form_row(form.url)}}
             </div>
-            <div class="pb-5 float-end">
-                {{ form_row(form.save, {'label' : 'Ajouter'})}}
+            <div class="pb-5 d-flex flex-row-reverse">
+                {{ form_row(form.save, {'label' : 'Valider'})}}
+                {# <a class="modal__close btn btn-danger fs-7 p-3 m-1">Retour</a> #}
             </div>
 
-            {{ form_rest(form) }} 
+        {{ form_rest(form) }} 
         <!--end::Body-->
     </div>
     <!--end::About card-->
 </div>
 <!--end::Container-->
+{% endblock %}
+
+
+{% block scripts %}
+    <script>
+        {# var line = new ProgressBar.Line("#progressbar", {
+            strokeWidth: 2,
+            easing: 'easeInOut',
+            duration: 5000,
+            color: '#FFEA82',
+            trailColor: '#eee',
+            trailWidth: 1,
+            svgStyle: {width: '100%', height: '100%'},
+            from: {color: '#FFEA82'},
+            to: {color: '#ED6A5A'},
+            step: (state, bar) => {
+              bar.path.setAttribute('stroke', state.color);
+            }
+        });
+        line.animate(1.0); #}
+    </script>
 {% endblock %}
