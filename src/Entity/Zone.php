@@ -47,6 +47,11 @@ class Zone
     private $url;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $active;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Categorie", mappedBy="zone")
      */
     private $categories;
@@ -94,6 +99,18 @@ class Zone
     public function setUrl($url)
     {
         $this->url = $url;
+
+        return $this;
+    }
+
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    public function setActive($active)
+    {
+        $this->active = $active;
 
         return $this;
     }

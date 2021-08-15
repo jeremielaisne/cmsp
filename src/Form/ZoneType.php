@@ -7,6 +7,7 @@ use App\Entity\Zone;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -42,15 +43,15 @@ class ZoneType extends AbstractType
                 'required' => false,
                 'label' => 'Url',                   
             ])
-            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
-                $createdAt = new DateTime();
+            // ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
+            //     $createdAt = new DateTime();
 
-                $form = $event->getForm();
-                $form->add('created_at', HiddenType::class, ['data' => $createdAt]);
-            })
-            ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
-                // TO DO : Vérifier les doublons
-            })
+            //     $form = $event->getForm();
+            //     $form->add('created_at', DateTimeType::class, ['data' => $createdAt]);
+            // })
+            // ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+            //     // TO DO : Vérifier les doublons
+            // })
             
             ->add('save', SubmitType::class, [
                 "attr" => ["class" => "btn btn-success fs-7 p-3 m-1"]

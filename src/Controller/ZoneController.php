@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Zone;
 use App\Form\ZoneType;
-
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,9 +23,15 @@ class ZoneController extends AbstractController
         $page = "zone";
         $title = "Gestion des Zones";
 
+        $user = "1";
+        $sites = "testweb";
+
+        $zones = $this->getDoctrine()->getRepository(Zone::class)->findByUserAndSites($user, $sites);
+
         return $this->render("dashboard/zone/index.html.twig", [
             "page" => $page,
-            "title" => $title
+            "title" => $title,
+            "zones" => $zones
         ]);
     }
 
@@ -48,6 +54,7 @@ class ZoneController extends AbstractController
         if($form->isSubmitted() && $form->isValid())
         {
             $zone = $form->getData();
+            $zone->setCreatedAt(new DateTime());
             $zone->setCreatedBy($createdBy);
             $zone->setSiteweb($siteweb);
   
@@ -55,7 +62,7 @@ class ZoneController extends AbstractController
             $em->persist($zone);
             $em->flush();
 
-            return $this->redirectToRoute('zone_index');
+            $this->addFlash('success', 'Création d\'une nouvelle zone correctement effectuée ! (Clic sur la croix en haut à gauche pour quitter la fenêtre)');
         }
 
         return $this->render("dashboard/zone/add.html.twig", [

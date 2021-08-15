@@ -24,6 +24,8 @@
         "@fortawesome/fontawesome-free": "^5.15.4",
         "ckeditor": "^4.12.1",
         "datatables": "^1.10.18",
+        "datatables.net": "^1.10.25",
+        "izitoast": "^1.4.0",
         "micromodal": "^0.4.6",
         "progressbar.js": "^1.1.0"
     }

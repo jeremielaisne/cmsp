@@ -1,0 +1,43 @@
+table {
+    width: 100%;
+    thead tr th{
+        border-bottom: 1px solid #aaa;
+        padding: 10px;
+    }
+
+    tbody tr {
+        border-bottom: 1px solid #aaa;
+        td{
+            padding: 10px;
+        }
+    }
+}
+
+.even {
+    background-color: #f1f1f1;;
+}
+
+.btn-sm {
+    width: 35px;
+    padding: 5px !important;
+    border-radius: 3px !important;
+}
+
+.font-weight-bold {
+    font-weight: bold;
+}
+
+.paginate_button {
+    color : #eee;
+    background-color: #f58540 !important;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid #f58540;
+}
+
+.current {
+    cursor: auto;
+    color: #f58540 !important;
+    background-color: #eee !important;
+    border: 1px solid #f58540;
+}

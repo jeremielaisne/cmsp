@@ -4,7 +4,14 @@
 <!--begin::Container-->
 <div id="kt_zone_container" class="fs-7 p-5">
     <!--begin::About card-->
-    <div class="card p-5">
+    <div class="card p-5 border">
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        
         <h4>Ajout d'une zone</h4>
 		<!--begin::Body-->
         {# templates/dashboard/add-contenu.html.twig #}

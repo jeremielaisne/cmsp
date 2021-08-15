@@ -2,10 +2,13 @@
 // --------------------
 import '../../app.js';
 import MicroModal from 'micromodal';
+import iziToast from 'izitoast';
 
 // SASS files
 // --------------------
 import '../../scss/pages/zone.scss';
+import '../../scss/components/izitoast.scss';
+import '../../scss/components/table.scss';
 
 // DOM Elements
 // --------------------
@@ -26,6 +29,9 @@ class Zone {
         // --------------------
         this.initModal()
 
+        // Ajouter une zone
+        // --------------------
+        //this.addZone()
     }
 
     initModal() {
@@ -49,6 +55,39 @@ class Zone {
 
     closeModal(id) {
         MicroModal.close(id);
+    }
+
+    addZone(){
+        iziToast.question({
+            timeout: 20000,
+            close: false,
+            overlay: true,
+            displayMode: 'once',
+            id: 'question',
+            zindex: 999,
+            title: "Ajouter",
+            message: 'Nouvelle zone ?',
+            position: 'center',
+            buttons: [
+                ['<button><b>OUI</b></button>', function (instance, toast) {
+            
+                    instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+                    $("form").trigger("submit");
+
+                }, true],
+                ['<button>NON</button>', function (instance, toast) {
+            
+                    instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+
+                }],
+            ],
+            onClosing: function(instance, toast, closedBy){
+                    console.info('Closing | closedBy: ' + closedBy);
+            },
+            onClosed: function(instance, toast, closedBy){
+                console.info('Closed | closedBy: ' + closedBy);
+            }
+        });
     }
 }
 

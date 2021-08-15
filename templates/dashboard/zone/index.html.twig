@@ -1,13 +1,45 @@
 {% extends 'index.html.twig' %}
 
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="/assets/datatables/media/css/jquery.dataTables.min.css">
+{% endblock %}
+
 {% block contenu %}
 <!--begin::Container-->
-<div class="container" id="kt_content_container">
+<div id="kt_content_container" class="container">
     <!--begin::About card-->
-    <div class="card">
+    <div class="card p-10">
 		<!--begin::Body-->
-        <a class="modal-open-add btn btn-success">Ajouter</a>
-        <a class="modal-open-edit btn btn-secondary">Editer</a>
+        <div class="d-flex justify-content-between mb-3">
+            <h4>Liste des zones</h4>
+            <a class="modal-open-add btn btn-success p-2"><i class="fas fa-plus"></i> Ajouter</a>
+        </div>
+
+        <!--begin::Datatable-->
+        <table id="liste_zone" class="display w-100">
+            <thead>
+                <tr>
+                    <th>Libelle</th>
+                    <th>Page</th>
+                    <th>URL</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for zone in zones %}
+                <tr>
+                    <td>{{zone.libelle}}</td>
+                    <td class="font-weight-bold">{{zone.page}}</td>
+                    <td>{{zone.url}}</td>
+                    <td>
+                        <a class="btn btn-sm btn-secondary"><i class="fas fa-edit"></i></a>
+                        <a class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <!--end::Datatable-->
+        </table>
         <!--end::Body-->
     </div>
     <!--end::About card-->
@@ -19,12 +51,33 @@
 {% endblock %}
 
 {% block scripts %}
+    <script type="text/javascript" charset="utf8" src="/assets/datatables/media/js/jquery.dataTables.min.js"></script>
     <script>
+
+        // Modals
         $(".modal-open-add").on("click", function(){
             MicroModal.show("modal-add");
         })
         $(".modal__close").on("click", function(){
             MicroModal.close("modal-add");
         })
+
+        //Datatables
+        $(document).ready( function () {
+            $('#liste_zone').DataTable({
+                responsive: true,
+                dom: "<'d-flex justify-content-between'<'row'l><'row'f>><bottom <'row float-end mt-5'p>>",
+                "info": false,
+                "columns": [
+                    { "width": "25%" },
+                    { "width": "25%" },
+                    { "width": "35%" },
+                    { "width": "15%" }
+                ],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+                }
+            });
+        });
     </script>
 {% endblock %}
