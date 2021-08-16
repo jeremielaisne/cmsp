@@ -2,15 +2,11 @@
 
 {% block body %}
 <!--begin::Container-->
-<div id="kt_zone_container" class="fs-7 p-5">
+<div id="kt_zone_container" class="fs-7 p-1">
     <!--begin::About card-->
     <div class="card p-5 border">
 
-        {% for message in app.flashes('success') %}
-            <div class="alert alert-success">
-                {{ message }}
-            </div>
-        {% endfor %}
+    <button class="modal__close fs-1 text-strong" aria-label="Close modal" data-micromodal-close></button>
         
         <h4>Ajout d'une zone</h4>
 		<!--begin::Body-->
@@ -24,10 +20,11 @@
             <div class="pb-5">
                 {{ form_row(form.libelle)}}
             </div>
-            <div class="pb-5">
+            <div>
                 {{ form_row(form.url)}}
+                <p class="text-secondary fs-9">Il faut respecter le format d'une url (ex: "/nom1/nom2")</p>
             </div>
-            <div class="pb-5 d-flex flex-row-reverse">
+            <div class="d-flex flex-row-reverse">
                 {{ form_row(form.save, {'label' : 'Valider'})}}
                 {# <a class="modal__close btn btn-danger fs-7 p-3 m-1">Retour</a> #}
             </div>

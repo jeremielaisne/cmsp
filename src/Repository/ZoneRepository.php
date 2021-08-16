@@ -23,7 +23,7 @@ class ZoneRepository extends ServiceEntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = "SELECT libelle, page, url
+        $sql = "SELECT id, libelle, page, url
                 FROM zone
                 WHERE active = 1 AND created_by = :user AND siteweb = :siteweb
                 ";

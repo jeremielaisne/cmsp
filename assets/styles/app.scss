@@ -10215,11 +10215,11 @@ textarea.form-control-lg {
 }
 
 .text-primary {
-  color: $primary !important;
+  color: $text-primary !important;
 }
 
 .text-secondary {
-  color: $secondary !important;
+  color: $text-secondary !important;
 }
 
 .text-success {
@@ -31709,10 +31709,6 @@ textarea.form-control-lg {
   transition: fill 0.3s ease;
 }
 
-.text-secondary {
-  color: #E4E6EF !important;
-}
-
 .text-inverse-secondary {
   color: #3F4254 !important;
 }
@@ -31805,10 +31801,6 @@ textarea.form-control-lg {
   transition: fill 0.3s ease;
 }
 
-.text-light {
-  color: #F5F8FA !important;
-}
-
 .text-inverse-light {
   color: #7E8299 !important;
 }
@@ -31899,10 +31891,6 @@ textarea.form-control-lg {
 }
 .text-active-inverse-light.active .svg-icon svg:hover [fill]:not(.permanent):not(g) {
   transition: fill 0.3s ease;
-}
-
-.text-success {
-  color: #50CD89 !important;
 }
 
 .text-inverse-success {
@@ -32001,10 +31989,6 @@ textarea.form-control-lg {
   transition: fill 0.3s ease;
 }
 
-.text-info {
-  color: #7239EA !important;
-}
-
 .text-inverse-info {
   color: #FFFFFF !important;
 }
@@ -32099,10 +32083,6 @@ textarea.form-control-lg {
 }
 .text-active-inverse-info.active .svg-icon svg:hover [fill]:not(.permanent):not(g) {
   transition: fill 0.3s ease;
-}
-
-.text-warning {
-  color: #FFC700 !important;
 }
 
 .text-inverse-warning {
@@ -32201,10 +32181,6 @@ textarea.form-control-lg {
   transition: fill 0.3s ease;
 }
 
-.text-danger {
-  color: #F1416C !important;
-}
-
 .text-inverse-danger {
   color: #FFFFFF !important;
 }
@@ -32299,10 +32275,6 @@ textarea.form-control-lg {
 }
 .text-active-inverse-danger.active .svg-icon svg:hover [fill]:not(.permanent):not(g) {
   transition: fill 0.3s ease;
-}
-
-.text-dark {
-  color: #181C32 !important;
 }
 
 .text-inverse-dark {

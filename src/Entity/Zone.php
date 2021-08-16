@@ -49,7 +49,7 @@ class Zone
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $active;
+    private $active = true;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Categorie", mappedBy="zone")

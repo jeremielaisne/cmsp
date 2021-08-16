@@ -28,12 +28,15 @@
             <tbody>
                 {% for zone in zones %}
                 <tr>
-                    <td>{{zone.libelle}}</td>
-                    <td class="font-weight-bold">{{zone.page}}</td>
-                    <td>{{zone.url}}</td>
+                    <td><input value="{{zone.libelle}}" class="edit_zone_libelle border-0 bg-transparent" readonly/></td>
+                    <td><input value="{{zone.page}}" class="edit_zone_page font-weight-bold border-0 bg-transparent" readonly/></td>
+                    <td><input value="{{zone.url}}" class="edit_zone_url border-0 bg-transparent" readonly/></td>
                     <td>
-                        <a class="btn btn-sm btn-secondary"><i class="fas fa-edit"></i></a>
-                        <a class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                        <a class="btn btn-sm btn-secondary btn-edit" data-id="{{zone.id}}"><i class="fas fa-edit"></i></a>
+                        <a class="d-none btn btn-sm btn-success btn-edit-confirm" data-id="{{zone.id}}"><i class="fas fa-check"></i></a>
+                        <a class="d-none btn btn-sm btn-warning btn-edit-annule mr-2" data-id="{{zone.id}}"><i class="fas fa-times"></i></a>
+                        <p class="d-none text-warning fs-9 col-12">Modification en cours</p>
+                        <a class="btn btn-sm btn-danger btn-delete" data-id="{{zone.id}}"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
                 {% endfor %}
@@ -46,24 +49,16 @@
 </div>
 <!--end::Container-->
 
-{% include './objects/modal.html.twig' with {'modal_path':'/zone/add', 'action': 'add'} %}
+{% include './objects/modal.html.twig' with {'modal_path':'/zone/add', 'modal_height':'483', 'action': 'add'} %}
 
 {% endblock %}
 
 {% block scripts %}
     <script type="text/javascript" charset="utf8" src="/assets/datatables/media/js/jquery.dataTables.min.js"></script>
     <script>
-
-        // Modals
-        $(".modal-open-add").on("click", function(){
-            MicroModal.show("modal-add");
-        })
-        $(".modal__close").on("click", function(){
-            MicroModal.close("modal-add");
-        })
-
-        //Datatables
+        // Datatables
         $(document).ready( function () {
+
             $('#liste_zone').DataTable({
                 responsive: true,
                 dom: "<'d-flex justify-content-between'<'row'l><'row'f>><bottom <'row float-end mt-5'p>>",
