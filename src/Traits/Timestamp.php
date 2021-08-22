@@ -1,14 +1,14 @@
 <?php
 
 // src/Traits/TimestampTrait.php
-namespace App\Traits;
+namespace Traits;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-trait TimestampTrait
+trait Timestamp
 {
     /**
      * @var datetime $createdAt

@@ -19,6 +19,49 @@ class CategorieRepository extends ServiceEntityRepository
         parent::__construct($registry, Categorie::class);
     }
 
+    public function findByUserAndSites($user, $siteweb)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "SELECT c.id, c.libelle, c.description, c.total_vue, z.id as zone_id, z.libelle as zone_libelle, z.page as zone_page
+                FROM categorie AS c
+                LEFT JOIN zone AS z ON c.zone_id = z.id
+                WHERE c.is_active = 1 AND c.created_by = :user AND c.siteweb = :siteweb
+                ";
+        
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['user' => $user, "siteweb" => $siteweb]);
+
+        $results = [];
+
+        $i = 0;
+        while ($row = $stmt->fetch()) {
+            $results[$i] = $row;
+            $results[$i]['champs'] = $this->getChamps($row['id']);
+            $i++;
+        }
+  
+        return $results;
+    }
+
+    public function getChamps($id)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "SELECT c.id, c.libelle
+                FROM champ AS c
+                LEFT JOIN categorie_champ AS cat ON cat.champ_id = c.id
+                WHERE cat.categorie_id = :id
+                ";
+        
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['id' => $id]);
+
+        $results = $stmt->fetchAll();
+
+        return $results;
+    }
+
     // /**
     //  * @return MyEntity[] Returns an array of MyEntity objects
     //  */

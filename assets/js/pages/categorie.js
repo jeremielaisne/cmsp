@@ -4,16 +4,19 @@ import '../../app.js';
 import MicroModal from 'micromodal';
 import iziToast from 'izitoast';
 
+//import 'select2';  
+//import 'select2/dist/css/select2.css';
+
 // SASS files
 // --------------------
-import '../../scss/pages/zone.scss';
+import '../../scss/pages/categorie.scss';
 import '../../scss/components/izitoast.scss';
 import '../../scss/components/table.scss';
 
 // DOM Elements
 // --------------------
 
-class Zone {
+class Categorie {
 
     constructor(options) {
 
@@ -24,7 +27,6 @@ class Zone {
     }
 
     init() {
-
         // Init Modal
         // --------------------
         this.initModal()
@@ -33,24 +35,25 @@ class Zone {
         // --------------------
         this.closeModal()
 
-        // Ajouter une zone
+        // Ajouter une catégorie
         // --------------------
-        this.addZone()
+        this.addCategorie()
 
-        // Modifier une zone
+        // Editer une catégorie
         // --------------------
-        this.editZone()
+        this.editCategorie()
 
-        // Supprimer une zone
+        // Supprimer une catégorie
         // --------------------
-        this.deleteZone()
+        this.deleteCategorie()
 
-        // Slugifier une adresse
+
+        // Init select2
         // --------------------
-        this.slugifyZone()
+        //this.initSelect2()
     }
 
-    initModal() {
+     initModal() {
         MicroModal.init({
             onShow: modal => console.info(`${modal.id} is shown`),
             onClose: modal => console.info(`${modal.id} is hidden`),
@@ -65,20 +68,21 @@ class Zone {
         });
     }
 
-    closeModal() {
-        $(".modal__close").on("click", function(){
-            MicroModal.close("modal-add");
-            iziToast.info({
-                timeout: 1000, 
-                icon: 'fas fa-check', 
-                title: 'OK', 
-                message: 'Ajout annulé !'
+    initSelect2() {
+        $(document).ready(function() {
+            $('.select2-enable').select2({
+                placeholder: 'Selectionnez une option'
             });
-            setTimeout(function(){location.reload()}, 1000)
         })
     }
 
-    addZone(){
+    closeModal() {
+        $(".modal__close").on("click", function(){
+            MicroModal.close("modal-add");
+        })
+    }
+
+    addCategorie(){
         // Ajout
         $(".modal-open-add").on("click", function(){
             MicroModal.show("modal-add");
@@ -88,9 +92,10 @@ class Zone {
             e.preventDefault()
             
             var formData = {
-                page: $("#zone_page").val(),
-                libelle: $("#zone_libelle").val(),
-                url: $("#zone_url").val()
+                libelle: $("#categorie_libelle").val(),
+                description: $("#categorie_description").val(),
+                champ: $("#categorie_champs").val(),
+                zone: $("#categorie_zone option:selected").val()
             };
             
             iziToast.question({
@@ -101,7 +106,7 @@ class Zone {
                 id: 'question',
                 zindex: 999,
                 title: "Ajouter",
-                message: 'Voulez-vous ajouter cette zone ?',
+                message: 'Voulez-vous ajouter cette catégorie ?',
                 position: 'center',
                 buttons: [
                     ['<button><b>OUI</b></button>', function (instance, toast) {
@@ -109,7 +114,7 @@ class Zone {
                         instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
 
                         $.ajax({
-                            url: "/zone/add",
+                            url: "/categorie/add",
                             method: "POST",
                             data: formData,
                             dataType: "JSON",
@@ -122,15 +127,14 @@ class Zone {
                                         message: 'L\'ajout a bien été effectuée !'
                                     });
                                     setTimeout(function(){parent.location.reload()}, 1000)
-                                }
-                                else {
+                                } else {
                                     iziToast.warning({
-                                        timeout: 500, 
+                                        timeout: 1500, 
                                         icon: 'fas fa-check', 
                                         title: 'Attention', 
-                                        message: 'La zone ou l\'url existe actuellement en base !'
+                                        message: 'La champ "champs" est actuellement vide, ce qui est anormal !'
                                     });
-                                    setTimeout(function(){location.reload()}, 500)
+                                    setTimeout(function(){location.reload()}, 1500)
                                 }
                             }
                         })
@@ -145,7 +149,7 @@ class Zone {
         })
     }
 
-    editZone(){
+    editCategorie(){
         // Modification
         $(".btn-edit").on("click", function(){
             $(this)
@@ -154,6 +158,21 @@ class Zone {
                 .find("input")
                 .removeClass("border-0")
                 .removeAttr("readonly")
+            ;
+            $(this)
+                .parent()
+                .parent()
+                .find("textarea")
+                .removeClass("border-0")
+                .removeAttr("readonly")
+            ;
+            $(this)
+                .parent()
+                .parent()
+                .find("select")
+                .removeClass("select-dropdown")
+                .find("option")
+                .removeAttr("disabled")
             ;
             $(this)
                 .addClass("d-none")
@@ -177,6 +196,21 @@ class Zone {
                 .attr("readonly")
             ;
             $(this)
+                .parent()
+                .parent()
+                .find("select")
+                .addClass("select-dropdown")
+                .find("option")
+                .attr("disabled")
+            ;
+            $(this)
+                .parent()
+                .parent()
+                .find("textarea")
+                .addClass("border-0")
+                .attr("readonly")
+            ;
+            $(this)
                 .addClass("d-none")
                 .next()
                 .addClass("d-none")
@@ -196,9 +230,9 @@ class Zone {
         $(".btn-edit-confirm").on("click", function(){
             
             var id = $(this).data("id")
-            var libelle = $(this).parent().parent().find(".edit_zone_libelle").val()
-            var page = $(this).parent().parent().find(".edit_zone_page").val()
-            var url = $(this).parent().parent().find(".edit_zone_url").val()
+            var libelle = $(this).parent().parent().find(".edit_categorie_libelle").val()
+            var zone = $(this).parent().parent().find(".edit_categorie_zone_page option:selected").data("id")
+            var description = $(this).parent().parent().find(".edit_categorie_description").val()
 
             iziToast.question({
                 timeout: 10000,
@@ -216,8 +250,8 @@ class Zone {
                         instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
 
                         $.ajax({
-                            url: "/zone/edit",
-                            data : {"id":id, "libelle":libelle, "page":page, "url":url},
+                            url: "/categorie/edit",
+                            data : {"id":id, "libelle":libelle, "zone":zone, "description":description},
                             method: "POST",
                             dataType: "JSON",
                             success: function(data){
@@ -240,11 +274,10 @@ class Zone {
                     }],
                 ]
             });
-        })  
-    
+        })
     }
 
-    deleteZone(){
+    deleteCategorie(){
         // Suppression
         $(".btn-delete").on("click", function(){
             var button = $(this)
@@ -257,14 +290,14 @@ class Zone {
                 id: 'question',
                 zindex: 999,
                 title: "Supprimer",
-                message: 'Confirmer-vous la suppression de la zone ?',
+                message: 'Confirmer-vous la suppression de la catégorie ?',
                 position: 'center',
                 buttons: [
                     ['<button><b>OUI</b></button>', function (instance, toast) {
                 
                         instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
                         $.ajax({
-                            url: "/zone/delete",
+                            url: "/categorie/delete",
                             data : { "id": id },
                             method: "POST",
                             dataType: "JSON",
@@ -294,23 +327,7 @@ class Zone {
         })
     }
 
-    slugifyZone(){
-        $("#zone_page, #zone_libelle").on("keyup", function(){
-            var $page = $("#zone_page").val()
-            var $libelle = $("#zone_libelle").val().split(' ');
-            var $slugifier = ""
-
-            for (var i in $libelle) {
-                $slugifier += "/"
-                $slugifier += $libelle[i].replace(/[^a-zA-Z0-9 ]/g, "")
-            }
-
-            var slugpage = "/" + $page.toLowerCase() + $slugifier.toLowerCase()
-
-             $("#zone_url").val(slugpage)
-        })
-    }
 }
 
-let _Zone = new Zone();
-_Zone.init();
+let _Categorie = new Categorie();
+_Categorie.init();

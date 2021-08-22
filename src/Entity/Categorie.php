@@ -5,7 +5,8 @@ namespace App\Entity;
 
 use App\Entity\Zone;
 use Doctrine\ORM\Mapping as ORM;
-use App\Traits\TimestampTrait as Timestamp;
+use Traits\User as UserTrait;
+use Traits\Timestamp as Timestamp;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -16,6 +17,7 @@ use Doctrine\Common\Collections\Collection;
 class Categorie 
 {
     use Timestamp;
+    use UserTrait;
 
     /**
      * @ORM\Column(type="integer")
@@ -35,11 +37,6 @@ class Categorie
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $diminutif;
-
-    /**
      * @ORM\Column(type="integer", length=255, nullable=true)
      */
     private $totalVue;
@@ -47,7 +44,7 @@ class Categorie
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isActive;
+    private $isActive = true;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Contenu", mappedBy="categorie")
@@ -59,10 +56,16 @@ class Categorie
      */
     private $zone;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Champ", inversedBy="categories")
+     */
+    private $champs;
+
 
     public function __construct()
     {
         $this->contenus = new ArrayCollection();
+        $this->champs = new ArrayCollection();
     }
 
     public function getId()
@@ -90,18 +93,6 @@ class Categorie
     public function setDescription($description)
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getDiminutif()
-    {
-        return $this->diminutif;
-    }
-
-    public function setDiminutif($diminutif)
-    {
-        $this->diminutif = $diminutif;
 
         return $this;
     }
@@ -147,6 +138,28 @@ class Categorie
     {
         $this->zone = $zone;
 
+        return $this;
+    }
+
+    /**
+     * @return Collection|Champ[]
+     */
+    public function getChamps(): Collection
+    {
+        return $this->champs;
+    }
+    public function addChamps(Champ $champ): self
+    {
+        if (!$this->champs->contains($champ)) {
+            $this->champs[] = $champ;
+        }
+        return $this;
+    }
+    public function removeChamps(Champ $champ): self
+    {
+        if ($this->champs->contains($champ)) {
+            $this->champs->removeElement($champ);
+        }
         return $this;
     }
 }

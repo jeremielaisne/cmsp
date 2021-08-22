@@ -6,7 +6,7 @@
     <!--begin::About card-->
     <div class="card p-5 border">
 
-    <button class="modal__close fs-1 text-strong" aria-label="Close modal" data-micromodal-close></button>
+    {# <button class="modal__close fs-1 text-strong" aria-label="Close modal" data-micromodal-close></button> #}
         
         <h4>Ajout d'une zone</h4>
 		<!--begin::Body-->
@@ -20,10 +20,20 @@
             <div class="pb-5">
                 {{ form_row(form.libelle)}}
             </div>
+            {% for message in app.flashes('info') %}
+                <div class="pb-5 alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
             <div>
                 {{ form_row(form.url)}}
                 <p class="text-secondary fs-9">Il faut respecter le format d'une url (ex: "/nom1/nom2")</p>
             </div>
+            {% for message in app.flashes('warning') %}
+                <div class="pb-5 alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
             <div class="d-flex flex-row-reverse">
                 {{ form_row(form.save, {'label' : 'Valider'})}}
                 {# <a class="modal__close btn btn-danger fs-7 p-3 m-1">Retour</a> #}

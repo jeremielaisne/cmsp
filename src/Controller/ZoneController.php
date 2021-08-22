@@ -3,13 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Zone;
+
 use App\Form\ZoneType;
 
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -59,16 +59,36 @@ class ZoneController extends AbstractController
         
         if($request->isXmlHttpRequest()) 
         {
+            $em = $this->getDoctrine()->getManager();
+
             $zone->setPage($request->get("page"));
             $zone->setLibelle($request->get("libelle"));
             $zone->setUrl($request->get("url"));
-            $zone->setCreatedBy("1");
-            $zone->setSiteweb("testweb");
-            $zone->setCreatedAt(new DateTime());
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($zone);
-            $em->flush();
+            // Vérification qu'une zone n'existe pas en bdd
+            $verif_zone = $em->getRepository(Zone::class)->findBy(["page" => $request->get("page"), "libelle" => $request->get("libelle")]);
+            $verif_zone_url = $em->getRepository(Zone::class)->findBy(["url" => $request->get("url")]);
+
+            if(empty($verif_zone) && empty($verif_zone_url))
+            {
+                $zone->setCreatedBy("1");
+                $zone->setSiteweb("testweb");
+                $zone->setCreatedAt(new DateTime());
+
+                $em->persist($zone);
+                $em->flush();
+            } 
+            else {
+                if(!empty($verif_zone))
+                {
+                    $this->addFlash('info', 'La zone (libelle et page) existe actuellement en BDD ! Veuillez ressayer svp...');
+                }
+                if(!empty($verif_zone_url))
+                {
+                    $this->addFlash('warning', 'L\'url existe actuellement en BDD ! Veuillez ressayer avec un autre URL svp...');
+                }
+                return new JsonResponse(false);
+            }
 
             return new JsonResponse(true);
         }

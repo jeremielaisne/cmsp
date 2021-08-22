@@ -1,13 +1,13 @@
 <?php
 
 // src/Traits/UserTrait.php
-namespace App\Traits;
+namespace Traits;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-trait UserTrait
+trait User
 {
     /**
      * @var string $siteweb

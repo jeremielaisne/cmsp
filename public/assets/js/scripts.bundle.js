@@ -5310,22 +5310,6 @@ var KTApp = function() {
         });
     }
 
-    var initSelect2 = function() {
-        var elements = [].slice.call(document.querySelectorAll('[data-control="select2"], [data-kt-select2="true"]'));
-       
-        elements.map(function (element) {
-            var options = {
-                dir: document.body.getAttribute('direction')
-            };
-
-            if ( element.getAttribute('data-hide-search') == 'true') {
-                options.minimumResultsForSearch = Infinity;
-            }
-            
-            $(element).select2(options);
-        });
-    }
-
     var initAutosize = function() {
         var inputs = [].slice.call(document.querySelectorAll('[data-kt-autosize="true"]'));
        
@@ -5493,8 +5477,6 @@ var KTApp = function() {
             
             this.initCheck();
             
-            this.initSelect2();
-            
             this.initCountUp();
 
             this.initCountUpTabs();
@@ -5536,10 +5518,6 @@ var KTApp = function() {
 
         initCheck: function() {
             initCheck();
-        },
-
-        initSelect2: function() {
-            initSelect2();
         },
 
         initCountUp: function() {

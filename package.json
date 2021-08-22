@@ -27,6 +27,7 @@
         "datatables.net": "^1.10.25",
         "izitoast": "^1.4.0",
         "micromodal": "^0.4.6",
-        "progressbar.js": "^1.1.0"
+        "progressbar.js": "^1.1.0",
+        "select2": "^4.1.0-rc.0"
     }
 }

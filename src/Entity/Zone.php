@@ -4,11 +4,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Traits\TimestampTrait as Timestamp;
-use App\Traits\UserTrait as UserTrait;
+use Traits\Timestamp as Timestamp;
+use Traits\User as UserTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
+use App\Validator\ZoneValidator;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -42,12 +43,13 @@ class Zone
 
     /**
      * @Assert\Length(min=3)
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Unique
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $url;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean")
      */
     private $active = true;
 
@@ -60,6 +62,11 @@ class Zone
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+    }
+
+    public function __toString() 
+    {
+        return $this->page . ' - ' . $this->libelle;
     }
 
     public function getId()

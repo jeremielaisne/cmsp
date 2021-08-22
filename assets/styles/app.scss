@@ -2461,7 +2461,6 @@ progress {
   background-color: #ffffff;
   background-clip: padding-box;
   border: 1px solid #E4E6EF;
-  appearance: none;
   border-radius: 0.25rem;
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -2633,7 +2632,6 @@ textarea.form-control-lg {
   border: 1px solid #E4E6EF;
   border-radius: 2.5rem;
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
-  appearance: none;
 }
 .form-select:focus {
   border-color: #B5B5C3;

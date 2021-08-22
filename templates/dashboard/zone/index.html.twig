@@ -26,11 +26,14 @@
                 </tr>
             </thead>
             <tbody>
+                {% if zones is empty %}
+                    <tr><td colspan='4' class="text-center">Le contenu du tableau est vide !<td></tr>
+                {% endif %}
                 {% for zone in zones %}
                 <tr>
-                    <td><input value="{{zone.libelle}}" class="edit_zone_libelle border-0 bg-transparent" readonly/></td>
-                    <td><input value="{{zone.page}}" class="edit_zone_page font-weight-bold border-0 bg-transparent" readonly/></td>
-                    <td><input value="{{zone.url}}" class="edit_zone_url border-0 bg-transparent" readonly/></td>
+                    <td data-search="{{zone.libelle}}"><input value="{{zone.libelle}}" class="edit_zone_libelle border-0 bg-transparent" readonly/></td>
+                    <td data-search="{{zone.page}}"><input value="{{zone.page}}" class="edit_zone_page font-weight-bold border-0 bg-transparent" readonly/></td>
+                    <td data-search="{{zone.url}}"><input value="{{zone.url}}" class="edit_zone_url border-0 bg-transparent" readonly/></td>
                     <td>
                         <a class="btn btn-sm btn-secondary btn-edit" data-id="{{zone.id}}"><i class="fas fa-edit"></i></a>
                         <a class="d-none btn btn-sm btn-success btn-edit-confirm" data-id="{{zone.id}}"><i class="fas fa-check"></i></a>

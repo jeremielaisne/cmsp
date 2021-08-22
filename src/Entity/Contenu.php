@@ -5,7 +5,7 @@ namespace App\Entity;
 
 use App\Entity\Categorie;
 use Doctrine\ORM\Mapping as ORM;
-use App\Traits\TimestampTrait as Timestamp;
+use Traits\Timestamp as Timestamp;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 

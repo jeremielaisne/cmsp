@@ -1,0 +1,86 @@
+{% extends 'index.html.twig' %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="/assets/datatables/media/css/jquery.dataTables.min.css">
+{% endblock %}
+
+{% block contenu %}
+<!--begin::Container-->
+<div id="kt_content_container" class="container">
+    <!--begin::About card-->
+    <div class="card p-10">
+		<!--begin::Body-->
+        <div class="d-flex justify-content-between mb-3">
+            <h4>Liste des catégories</h4>
+            <a class="modal-open-add btn btn-success p-2"><i class="fas fa-plus"></i> Ajouter</a>
+        </div>
+
+        <!--begin::Datatable-->
+        <table id="liste_categorie" class="display w-100">
+            <thead>
+                <tr>
+                    <th>Libelle</th>
+                    <th>Zone</th>
+                    <th>Description</th>
+                    <th>Champs</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if categories is empty %}
+                    <tr>
+                        <td colspan='4' class="text-center">Tableau vide !</td>
+                    </tr>
+                {% endif %}
+                {% for categorie in categories %}
+                <tr>
+                    <td data-search="{{categorie.libelle}}"><input value="{{categorie.libelle}}" class="edit_categorie_libelle border-0 bg-transparent w-100" readonly/></td>
+                    <td data-search="{{categorie.zone_page}}"><select class="edit_categorie_zone_page select-dropdown bg-transparent font-weight-bold">{% for zone in zones %}<option data-id="{{zone.id}}" {% if zone.id == categorie.zone_id %}selected{% else %}disabled{% endif %}>{{zone.page}} - {{zone.libelle}}</option>{% endfor %}</select></td>
+                    <td><textarea class="edit_categorie_description border-0 bg-transparent fs-9 w-100" readonly/>{{categorie.description}}</textarea></td>
+                    <td data-search="{% for cat in categorie.champs %}{{cat.libelle}}{% endfor %}">{% for cat in categorie.champs %}<span {% if cat.id == "1" %}class="edit_categorie_champ badge badge-dark"{% elseif cat.id == "6" %}class="edit_categorie_champ badge badge-info"{% else %}class="edit_categorie_champ badge badge-secondary"{% endif %}>{{cat.libelle}}</span> {% endfor %}</td>
+                    <td>
+                        <a class="btn btn-sm btn-secondary btn-edit" data-id="{{categorie.id}}"><i class="fas fa-edit"></i></a>
+                        <a class="d-none btn btn-sm btn-success btn-edit-confirm" data-id="{{categorie.id}}"><i class="fas fa-check"></i></a>
+                        <a class="d-none btn btn-sm btn-warning btn-edit-annule mr-2" data-id="{{categorie.id}}"><i class="fas fa-times"></i></a>
+                        <p class="d-none text-warning fs-9 col-12">Modification en cours</p>
+                        <a class="btn btn-sm btn-danger btn-delete" data-id="{{categorie.id}}"><i class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <!--end::Datatable-->
+        </table>
+        <!--end::Body-->
+    </div>
+    <!--end::About card-->
+</div>
+<!--end::Container-->
+
+{% include './objects/modal.html.twig' with {'modal_path':'/categorie/add', 'modal_height':'483', 'action': 'add'} %}
+
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" charset="utf8" src="/assets/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script>
+        // Datatables
+        $(document).ready( function () {
+
+            $('#liste_categorie').DataTable({
+                responsive: true,
+                dom: "<'d-flex justify-content-between'<'row'l><'row'f>><bottom <'row float-end mt-5'p>>",
+                "info": false,
+                "columns": [
+                    { "width": "20%" },
+                    { "width": "20%" },
+                    { "width": "20%" },
+                    { "width": "25%" },
+                    { "width": "10%" }
+                ],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+                }
+            });
+        });
+    </script>
+{% endblock %}

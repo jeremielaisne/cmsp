@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Contenu;
 use App\Form\ContenuType;
+
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,33 +22,44 @@ class ContenuController extends AbstractController
      */
     public function index()
     {
-        $page = "app";
-        $title = "Dashboard - Liste de contenus";
+        $page = "contenu";
+        $title = "Gestion des contenus";
+
+        $user = "1";
+        $sites = "testweb";
+
+        $contenu = $this->getDoctrine()->getRepository(Contenu::class)->findByUserAndSites($user, $sites);
 
         return $this->render("dashboard/contenu/index.html.twig", [
             "page" => $page,
-            "title" => $title
+            "title" => $title,
+            "contenu" => $contenu
         ]);
     }
 
     /**
-     * @Route("/add", name="add")
+     * @Route("/add", name="add", methods={"GET", "POST"})
      */
     public function add(Request $request) : Response
     {
-        $page = "app";
-        $title = "Dashboard - Ajout de contenus";
+        $page = "contenu";
+        $title = "Gestion de contenus";
 
         $contenu = new Contenu();
 
         $form = $this->createForm(ContenuType::class, $contenu);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
-        {
-            $task = $form->getData();
+        // if($form->isSubmitted() && $form->isValid())
+        // {
+        //     $task = $form->getData();
 
-            return $this->redirectToRoute('contenu_index');
+        //     return $this->redirectToRoute('contenu_index');
+        // }
+
+        if($request->isXmlHttpRequest()) 
+        {
+            return new JsonResponse(true);
         }
 
         return $this->render("dashboard/contenu/add.html.twig", [
