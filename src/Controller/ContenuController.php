@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Categorie;
 use App\Entity\Contenu;
 use App\Form\ContenuType;
 
@@ -24,16 +25,14 @@ class ContenuController extends AbstractController
     {
         $page = "contenu";
         $title = "Gestion des contenus";
-
-        $user = "1";
         $sites = "testweb";
 
-        $contenu = $this->getDoctrine()->getRepository(Contenu::class)->findByUserAndSites($user, $sites);
+        $contenus = $this->getDoctrine()->getRepository(Contenu::class)->findBySites($sites);
 
         return $this->render("dashboard/contenu/index.html.twig", [
             "page" => $page,
             "title" => $title,
-            "contenu" => $contenu
+            "contenus" => $contenus
         ]);
     }
 
@@ -44,22 +43,24 @@ class ContenuController extends AbstractController
     {
         $page = "contenu";
         $title = "Gestion de contenus";
+        $id = $request->get('id');
+
+        if (empty($id))
+        {
+            return $this->redirectToRoute("dashboard_index");
+        }
 
         $contenu = new Contenu();
+        $categorie = $this->getDoctrine()->getRepository(Categorie::class)->find($id);
 
-        $form = $this->createForm(ContenuType::class, $contenu);
+        $form = $this->createForm(ContenuType::class, $contenu, array('categorie' => $categorie));
         $form->handleRequest($request);
 
-        // if($form->isSubmitted() && $form->isValid())
-        // {
-        //     $task = $form->getData();
-
-        //     return $this->redirectToRoute('contenu_index');
-        // }
-
-        if($request->isXmlHttpRequest()) 
+        if($form->isSubmitted() && $form->isValid())
         {
-            return new JsonResponse(true);
+            $contenu = $form->getData();
+
+            return $this->redirectToRoute('contenu_index');
         }
 
         return $this->render("dashboard/contenu/add.html.twig", [

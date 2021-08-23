@@ -3,11 +3,15 @@
 // src/Entity/Contenu.php
 namespace App\Entity;
 
-use App\Entity\Categorie;
 use Doctrine\ORM\Mapping as ORM;
-use Traits\Timestamp as Timestamp;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+
+use App\Entity\Categorie;
+use App\Traits\Timestamp as TraitsTimestamp;
+use App\Traits\User as TraitsUser;
+
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="contenu")
@@ -15,7 +19,8 @@ use Doctrine\Common\Collections\Collection;
  */
 class Contenu 
 {
-    use Timestamp;
+    use TraitsTimestamp;
+    use TraitsUser;
 
     /**
      * @ORM\Column(type="integer")
@@ -25,24 +30,41 @@ class Contenu
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=3)
      */
-    private $titre;
+    private $langue;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @Assert\Choice(
+     *     choices = {"titre", "sous-titre", "texte", "url", "liste", "illustration"},
+     *     message = "Choisi un type correct parmis la liste."
+     * )
+     * @ORM\Column(type="string", length=10)
      */
-    private $texte;
+    private $type;
+
+     /**
+     * @Assert\Json(
+     *   message = "Vous avez entrer un JSON invalide."
+     * )
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $contenu;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isActive;
+    private $isOnline = true;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="categories")
+     * @ORM\Column(type="boolean")
      */
-    private $categories;
+    private $isActive = true;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="categorie")
+     */
+    private $categorie;
 
 
     public function __construct()
@@ -54,26 +76,50 @@ class Contenu
         return $this->id;
     }
     
-    public function getTitre()
+    public function getLangue()
     {
-        return $this->titre;
+        return $this->langue;
     }
 
-    public function setTitre($titre)
+    public function setLangue($langue)
     {
-        $this->titre = $titre;
+        $this->langue = $langue;
 
         return $this;
     }
 
-    public function getTexte()
+    public function getType()
     {
-        return $this->texte;
+        return $this->type;
     }
 
-    public function setTexte($texte)
+    public function setType($type)
     {
-        $this->texte = $texte;
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getContenu()
+    {
+        return $this->contenu;
+    }
+
+    public function setContenu($contenu)
+    {
+        $this->contenu = $contenu;
+
+        return $this;
+    }
+
+    public function getIsOnline()
+    {
+        return $this->isOnline;
+    }
+
+    public function setIsOnline($isOnline)
+    {
+        $this->isOnline = $isOnline;
 
         return $this;
     }
@@ -90,14 +136,14 @@ class Contenu
         return $this;
     }
 
-    public function getCategories(): ?Categorie
+    public function getCategorie(): ?Categorie
     {
-        return $this->categories;
+        return $this->categorie;
     }
 
-    public function setCategories(?Categorie $categories): self
+    public function setCategorie(?Categorie $categorie): self
     {
-        $this->categories = $categories;
+        $this->categorie = $categorie;
 
         return $this;
     }

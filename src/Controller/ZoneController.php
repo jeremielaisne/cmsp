@@ -25,11 +25,9 @@ class ZoneController extends AbstractController
     {
         $page = "zone";
         $title = "Gestion des Zones";
-
-        $user = "1";
         $sites = "testweb";
 
-        $zones = $this->getDoctrine()->getRepository(Zone::class)->findByUserAndSites($user, $sites);
+        $zones = $this->getDoctrine()->getRepository(Zone::class)->findBySites($sites);
 
         return $this->render("dashboard/zone/index.html.twig", [
             "page" => $page,

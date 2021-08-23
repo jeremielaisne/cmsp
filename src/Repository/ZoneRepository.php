@@ -19,17 +19,17 @@ class ZoneRepository extends ServiceEntityRepository
         parent::__construct($registry, Zone::class);
     }
 
-    public function findByUserAndSites($user, $siteweb)
+    public function findBySites($siteweb)
     {
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = "SELECT id, libelle, page, url
                 FROM zone
-                WHERE active = 1 AND created_by = :user AND siteweb = :siteweb
+                WHERE active = 1 AND siteweb = :siteweb
                 ";
         
         $stmt = $conn->prepare($sql);
-        $stmt->execute(['user' => $user, "siteweb" => $siteweb]);
+        $stmt->execute(["siteweb" => $siteweb]);
         $results = $stmt->fetchAll();
                  
         return $results;

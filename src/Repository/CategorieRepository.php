@@ -19,18 +19,18 @@ class CategorieRepository extends ServiceEntityRepository
         parent::__construct($registry, Categorie::class);
     }
 
-    public function findByUserAndSites($user, $siteweb)
+    public function findBySites($siteweb)
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = "SELECT c.id, c.libelle, c.description, c.total_vue, z.id as zone_id, z.libelle as zone_libelle, z.page as zone_page
+        $sql = "SELECT c.id, c.libelle, c.description, z.id as zone_id, z.libelle as zone_libelle, z.page as zone_page
                 FROM categorie AS c
                 LEFT JOIN zone AS z ON c.zone_id = z.id
-                WHERE c.is_active = 1 AND c.created_by = :user AND c.siteweb = :siteweb
+                WHERE c.is_active = 1 AND z.siteweb = :siteweb
                 ";
         
         $stmt = $conn->prepare($sql);
-        $stmt->execute(['user' => $user, "siteweb" => $siteweb]);
+        $stmt->execute(["siteweb" => $siteweb]);
 
         $results = [];
 

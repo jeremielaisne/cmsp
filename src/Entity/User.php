@@ -3,11 +3,13 @@
 // src/Entity/User.php
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Traits\Timestamp as Timestamp;
+
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+
+use App\Traits\Timestamp as TraitsTimestamp;
 
 /**
  * @ORM\Table(name="user")
@@ -15,7 +17,7 @@ use Doctrine\Common\Collections\Collection;
  */
 class User implements UserInterface, \Serializable
 {
-    use Timestamp;
+    use TraitsTimestamp;
 
     /**
      * @ORM\Column(type="integer")

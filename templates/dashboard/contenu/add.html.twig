@@ -1,53 +1,38 @@
-{% extends 'base.html.twig' %}
+{% extends 'index.html.twig' %}
 
-{% block body %}
+{% block contenu %}
 <!--begin::Container-->
-<div id="kt_content_container" class="fs-7 p-15">
+<div id="kt_content_container" class="fs-7 p-5">
+
+    <!--begin::Body-->
     <!--begin::About card-->
-    <div class="card p-5">
+    <div class="card p-5 border mb-5">
 		<!--begin::Body-->
+
+        <h4 class="mb-10">Ajout d'un contenu</h4>
+
         {# templates/dashboard/add-contenu.html.twig #}
         {{ form_start(form) }}
+
             {{ form_errors(form) }}
+        
+        {{ form_rest(form) }} 
 
-            <div class="pb-5">
-                {{ form_row(form.categories)}}
-            </div>
-            <div class="pb-5">
-                {{ form_row(form.titre)}}
-            </div>
-            <div class="pb-5">
-                {{ form_row(form.texte)}}
-            </div>
-            <div class="pb-5 float-end">
-                {{ form_row(form.save, {'label' : 'Ajouter'})}}
-            </div>
-
-            {{ form_rest(form) }} 
-        <!--end::Body-->
+        
     </div>
     <!--end::About card-->
-    <div id="progressbar"></div>
+
+    <!--begin::About card-->
+    <div class="card p-5 border">
+
+        <h4>Liste des contenus de la catégorie</h4>
+        <ul>
+            <!-- TO DO Faire une liste -->
+        </ul>
+    </div>
+    <!--end::About card-->
+
+    <!--end::Body-->
 </div>
 <!--end::Container-->
-{% endblock %}
-
-{% block scripts %}
-    <script>
-        {# var line = new ProgressBar.Line(container, {
-            strokeWidth: 2,
-            easing: 'easeInOut',
-            duration: 5000,
-            color: '#FFEA82',
-            trailColor: '#eee',
-            trailWidth: 1,
-            svgStyle: {width: '100%', height: '100%'},
-            from: {color: '#FFEA82'},
-            to: {color: '#ED6A5A'},
-            step: (state, bar) => {
-              bar.path.setAttribute('stroke', state.color);
-            }
-        });
-        line.animate(1.0); #}
-    </script>
 {% endblock %}

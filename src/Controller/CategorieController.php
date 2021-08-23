@@ -27,13 +27,11 @@ class CategorieController extends AbstractController
     {
         $page = "categorie";
         $title= "Gestion des categories";
-
-        $user = "1";
         $sites = "testweb";
 
-        $categories = $this->getDoctrine()->getRepository(Categorie::class)->findByUserAndSites($user, $sites);
+        $categories = $this->getDoctrine()->getRepository(Categorie::class)->findBySites( $sites);
 
-        $zones =  $this->getDoctrine()->getRepository(Zone::class)->findByUserAndSites($user, $sites);
+        $zones =  $this->getDoctrine()->getRepository(Zone::class)->findBySites($sites);
 
         return $this->render("dashboard/categorie/index.html.twig", [
             "page" => $page, 
@@ -75,7 +73,6 @@ class CategorieController extends AbstractController
             $categorie->setZone($obj_zone);
 
             $categorie->setCreatedBy("1");
-            $categorie->setSiteweb("testweb");
             $categorie->setCreatedAt(new DateTime());
 
             $em = $this->getDoctrine()->getManager();

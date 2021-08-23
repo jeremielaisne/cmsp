@@ -3,12 +3,13 @@
 // src/Entity/Categorie.php
 namespace App\Entity;
 
-use App\Entity\Zone;
 use Doctrine\ORM\Mapping as ORM;
-use Traits\User as UserTrait;
-use Traits\Timestamp as Timestamp;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+
+use App\Entity\Zone;
+use App\Traits\Timestamp as TraitsTimestamp;
+use App\Traits\User as TraitsUser;
 
 /**
  * @ORM\Table(name="categorie")
@@ -16,8 +17,8 @@ use Doctrine\Common\Collections\Collection;
  */
 class Categorie 
 {
-    use Timestamp;
-    use UserTrait;
+    use TraitsTimestamp;
+    use TraitsUser;
 
     /**
      * @ORM\Column(type="integer")
@@ -35,11 +36,6 @@ class Categorie
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
-
-    /**
-     * @ORM\Column(type="integer", length=255, nullable=true)
-     */
-    private $totalVue;
 
     /**
      * @ORM\Column(type="boolean")
@@ -97,18 +93,6 @@ class Categorie
         return $this;
     }
 
-    public function getTotalVue()
-    {
-        return $this->totalVue;
-    }
-
-    public function setTotalVue($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
     public function getIsActive()
     {
         return $this->isActive;
@@ -128,6 +112,21 @@ class Categorie
     {
         return $this->contenus;
     }
+    public function addContenus(Contenu $contenu): self
+    {
+        if (!$this->contenus->contains($contenu)) {
+            $this->contenus[] = $contenu;
+        }
+        return $this;
+    }
+    public function removeContenus(Contenu $contenu): self
+    {
+        if ($this->contenus->contains($contenu)) {
+            $this->contenus->removeElement($contenu);
+        }
+        return $this;
+    }
+
 
     public function getZone(): ?Zone
     {

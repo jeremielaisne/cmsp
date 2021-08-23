@@ -19,6 +19,26 @@ class ContenuRepository extends ServiceEntityRepository
         parent::__construct($registry, Contenu::class);
     }
 
+    public function findBySites($siteweb)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "SELECT ct.id, ct.is_active, ct.langue, ct.type, ct.contenu, c.libelle, z.libelle, z.page
+                FROM contenu AS ct
+                LEFT JOIN categorie AS c ON ct.categorie_id = c.id
+                LEFT JOIN zone AS z ON c.zone_id = z.id
+                WHERE c.is_active = 1 AND z.siteweb = :siteweb
+                ";
+        
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(["siteweb" => $siteweb]);
+
+        $results = $stmt->fetchAll();
+  
+        return $results;
+    }
+
+
     // /**
     //  * @return MyEntity[] Returns an array of MyEntity objects
     //  */

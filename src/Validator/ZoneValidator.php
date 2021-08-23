@@ -18,7 +18,8 @@ class ZoneValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         $existingZone = $this->zoneRepository->findOneBy([
-            "libelle" => $value
+            "url" => $value,
+            "siteweb" => "testweb"
         ]);
 
         if (!$existingZone) {

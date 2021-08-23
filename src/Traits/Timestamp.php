@@ -1,7 +1,7 @@
 <?php
 
 // src/Traits/TimestampTrait.php
-namespace Traits;
+namespace App\Traits;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;

@@ -4,12 +4,73 @@
 <!--begin::Container-->
 <div class="container" id="kt_content_container">
     <!--begin::About card-->
-    <div class="card">
+    <div class="card p-10">
 		<!--begin::Body-->
-        
+        <div class="d-flex justify-content-between mb-3">
+            <h4>Liste des contenus</h4>
+        </div>
+        <!--begin::Datatable-->
+        <table id="liste_contenu" class="display w-100">
+            <thead>
+                <tr>
+                    <th>Libelle</th>
+                    <th>Langue</th>
+                    <th>Type</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if contenus is empty %}
+                    <tr>
+                        <td colspan='4' class="text-center">Tableau vide !</td>
+                    </tr>
+                {% endif %}
+                {% for contenu in contenus %}
+                <tr>
+                    <td data-search="{{contenu.libelle}}"><input value="{{contenu.libelle}}" class="edit_contenu_libelle border-0 bg-transparent w-100" readonly/></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <a class="btn btn-sm btn-secondary btn-edit" data-id="{{contenu.id}}"><i class="fas fa-edit"></i></a>
+                        <a class="d-none btn btn-sm btn-success btn-edit-confirm" data-id="{{contenu.id}}"><i class="fas fa-check"></i></a>
+                        <a class="d-none btn btn-sm btn-warning btn-edit-annule mr-2" data-id="{{contenu.id}}"><i class="fas fa-times"></i></a>
+                        <p class="d-none text-warning fs-9 col-12">Modification en cours</p>
+                        <a class="btn btn-sm btn-danger btn-delete" data-id="{{contenu.id}}"><i class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <!--end::Datatable-->
+        </table>
         <!--end::Body-->
     </div>
     <!--end::About card-->
 </div>
 <!--end::Container-->
+
+
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" charset="utf8" src="/assets/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script>
+        // Datatables
+        $(document).ready( function () {
+
+            $('#liste_contenu').DataTable({
+                responsive: true,
+                dom: "<'d-flex justify-content-between'<'row'l><'row'f>><bottom <'row float-end mt-5'p>>",
+                "info": false,
+                "columns": [
+                    { "width": "20%" },
+                    { "width": "20%" },
+                    { "width": "40%" },
+                    { "width": "15%" },
+                ],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+                }
+            });
+        });
+    </script>
 {% endblock %}

@@ -1,7 +1,7 @@
 <?php
 
 // src/Traits/UserTrait.php
-namespace Traits;
+namespace App\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -9,13 +9,6 @@ use Doctrine\Common\Collections\Collection;
 
 trait User
 {
-    /**
-     * @var string $siteweb
-     * 
-     * @ORM\Column(name="siteweb", type="string")
-     */
-    private $siteweb;
-
     /**
      * @var integer $createdBy
      * 
@@ -45,25 +38,4 @@ trait User
         return $this;
     }
 
-    /**
-     * Get siteweb
-     *
-     * @return string
-     */
-    public function getSiteweb()
-    {
-        return $this->siteweb;
-    }
-
-    /**
-     * Set siteweb
-     *
-     * @param string $siteweb
-     */
-    public function setSiteweb($siteweb)
-    {
-        $this->siteweb = $siteweb;
-
-        return $this;
-    }
 }

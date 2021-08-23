@@ -79,6 +79,13 @@ class Categorie {
     closeModal() {
         $(".modal__close").on("click", function(){
             MicroModal.close("modal-add");
+            iziToast.info({
+                timeout: 1000, 
+                icon: 'fas fa-check', 
+                title: 'OK', 
+                message: 'Ajout annulé !'
+            });
+            setTimeout(function(){location.reload()}, 1000)
         })
     }
 

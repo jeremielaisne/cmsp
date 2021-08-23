@@ -4,13 +4,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Traits\Timestamp as Timestamp;
-use Traits\User as UserTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-use App\Validator\ZoneValidator;
+use App\Validator as Validator;
 use Symfony\Component\Validator\Constraints as Assert;
+
+use App\Traits\Timestamp as TraitsTimestamp;
+use App\Traits\User as TraitsUser;
 
 /**
  * @ORM\Table(name="zone")
@@ -18,8 +19,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Zone 
 {
-    use Timestamp;
-    use UserTrait;
+    use TraitsTimestamp;
+    use TraitsUser;
 
     /**
      * @ORM\Column(type="integer")
@@ -29,24 +30,31 @@ class Zone
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      * @Assert\Length(min=3)
-     * @ORM\Column(type="string", length=255)
      */
     private $page;
 
     /**
-     * @Assert\Length(min=3)
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(min=3)
+     * @Validator\Zone
      */
     private $libelle;
 
     /**
+     * @ORM\Column(type="string", length=255)
      * @Assert\Length(min=3)
-     * @Assert\Unique
-     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $url;
+
+    /**
+     * @var string $siteweb
+     * 
+     * @ORM\Column(name="siteweb", length=255, type="string")
+     */
+    private $siteweb;
 
     /**
      * @ORM\Column(type="boolean")
@@ -123,7 +131,29 @@ class Zone
     }
 
     /**
-     * @return Collection|Contenu[]
+     * Get siteweb
+     *
+     * @return string
+     */
+    public function getSiteweb()
+    {
+        return $this->siteweb;
+    }
+
+    /**
+     * Set siteweb
+     *
+     * @param string $siteweb
+     */
+    public function setSiteweb($siteweb)
+    {
+        $this->siteweb = $siteweb;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Categorie[]
      */
     public function getCategories(): Collection
     {

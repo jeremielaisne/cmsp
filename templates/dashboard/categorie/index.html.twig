@@ -34,7 +34,7 @@
                 {% endif %}
                 {% for categorie in categories %}
                 <tr>
-                    <td data-search="{{categorie.libelle}}"><input value="{{categorie.libelle}}" class="edit_categorie_libelle border-0 bg-transparent w-100" readonly/></td>
+                    <td data-search="{{categorie.libelle}}"><input value="{{categorie.libelle}}" class="edit_categorie_libelle border-0 bg-transparent w-100" readonly/><a class="btn btn-success p-2 fs-9 mt-1" href="{{ path('contenu_add',{'id':categorie.id})}}"><i class="fas fa-plus"></i> Ajouter du contenu</a></td>
                     <td data-search="{{categorie.zone_page}}"><select class="edit_categorie_zone_page select-dropdown bg-transparent font-weight-bold">{% for zone in zones %}<option data-id="{{zone.id}}" {% if zone.id == categorie.zone_id %}selected{% else %}disabled{% endif %}>{{zone.page}} - {{zone.libelle}}</option>{% endfor %}</select></td>
                     <td><textarea class="edit_categorie_description border-0 bg-transparent fs-9 w-100" readonly/>{{categorie.description}}</textarea></td>
                     <td data-search="{% for cat in categorie.champs %}{{cat.libelle}}{% endfor %}">{% for cat in categorie.champs %}<span {% if cat.id == "1" %}class="edit_categorie_champ badge badge-dark"{% elseif cat.id == "6" %}class="edit_categorie_champ badge badge-info"{% else %}class="edit_categorie_champ badge badge-secondary"{% endif %}>{{cat.libelle}}</span> {% endfor %}</td>
@@ -71,8 +71,8 @@
                 dom: "<'d-flex justify-content-between'<'row'l><'row'f>><bottom <'row float-end mt-5'p>>",
                 "info": false,
                 "columns": [
-                    { "width": "20%" },
-                    { "width": "20%" },
+                    { "width": "25%" },
+                    { "width": "15%" },
                     { "width": "20%" },
                     { "width": "25%" },
                     { "width": "10%" }
