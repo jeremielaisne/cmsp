@@ -23,15 +23,36 @@ class ContenuRepository extends ServiceEntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = "SELECT ct.id, ct.is_active, ct.langue, ct.type, ct.contenu, c.libelle, z.libelle, z.page
+        $sql = "SELECT ct.id, ct.is_active, ct.langue, ct.type, ct.contenu, c.libelle as categorie_libelle, z.libelle as zone_libelle, z.page, CONCAT(z.url,'/',c.slug,'/',lower(ct.langue),'/',ct.id) AS slug
                 FROM contenu AS ct
                 LEFT JOIN categorie AS c ON ct.categorie_id = c.id
                 LEFT JOIN zone AS z ON c.zone_id = z.id
                 WHERE c.is_active = 1 AND z.siteweb = :siteweb
+                -- ORDER BY c.order, ct.order
                 ";
         
         $stmt = $conn->prepare($sql);
         $stmt->execute(["siteweb" => $siteweb]);
+
+        $results = $stmt->fetchAll();
+  
+        return $results;
+    }
+
+    public function findBySiteAndCategorie($siteweb, $categorie)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "SELECT ct.id, ct.is_active, ct.langue, ct.type, c.libelle as categorie_libelle, z.libelle as zone_libelle, z.page, z.url
+                FROM contenu AS ct
+                LEFT JOIN categorie AS c ON ct.categorie_id = c.id
+                LEFT JOIN zone AS z ON c.zone_id = z.id
+                WHERE c.is_active = 1 AND z.siteweb = :siteweb AND ct.categorie_id = :categorie
+                -- ORDER BY c.order, ct.order
+                ";
+        
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(["siteweb" => $siteweb, "categorie" => $categorie]);
 
         $results = $stmt->fetchAll();
   

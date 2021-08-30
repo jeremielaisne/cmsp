@@ -2,11 +2,11 @@
 
 {% block contenu %}
 <!--begin::Container-->
-<div id="kt_content_container" class="fs-7 p-5">
+<div id="kt_content_container" class="container">
 
     <!--begin::Body-->
     <!--begin::About card-->
-    <div class="card p-5 border mb-5">
+    <div class="card p-10 border mb-5">
 		<!--begin::Body-->
 
         <h4 class="mb-10">Ajout d'un contenu</h4>
@@ -18,17 +18,28 @@
         
         {{ form_rest(form) }} 
 
-        
+        <div class="d-flex flex-row-reverse">
+            <button class="btn btn-success p-3 m-2 fs-8">Valider</button>
+            <a href="{{path('categorie_index')}}" class="btn btn-danger p-3 m-2 fs-8">Retour</a>
+        </div>
     </div>
     <!--end::About card-->
 
     <!--begin::About card-->
-    <div class="card p-5 border">
+    <div class="card p-10 border">
 
-        <h4>Liste des contenus de la catégorie</h4>
-        <ul>
-            <!-- TO DO Faire une liste -->
-        </ul>
+        <h4 class="mb-10">Liste des contenus de la catégorie</h4>
+        {% if contenus is defined and contenus is not empty %}
+            <!-- begin::liste -->
+            <ul>
+                {% for contenu in contenus %}
+                <li><span class="fs-7 font-weight-bold p-3">{{contenu.langue}} :{% for ctype in contenu.type %} {{ctype}} {% if not loop.last %},{% endif %} {% endfor %}</span> - <span class="fs-8 p-3">{{contenu.categorie_libelle}}</span> - <span class="fs-8 p-3">Zone : {{contenu.page}} - {{contenu.zone_libelle}}<span></li>
+                {% endfor %}
+            </ul>
+            <!-- end::liste -->
+        {% else %}
+            <p>Il n'y a pas de contenu actif pour cette catégorie</p>
+        {% endif %}
     </div>
     <!--end::About card-->
 

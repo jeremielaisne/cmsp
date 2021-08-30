@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -56,6 +57,10 @@ class CategorieType extends AbstractType
                         ->andWhere('z.active = 1');
                 }
             ])
+            // ->add('order', IntegerType::class, [
+            //     'attr' => ['class' => 'page-input'],
+            //     'label' => 'Ordre',                   
+            // ])
             
             
             ->add('save', SubmitType::class, [

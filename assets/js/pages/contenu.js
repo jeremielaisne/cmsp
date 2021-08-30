@@ -65,44 +65,6 @@ class Contenu {
             MicroModal.show("modal-add");
         })
 
-        $("form").on("submit", function(e){
-            e.preventDefault()
-            
-            var formData = {
-            };
-            
-            iziToast.question({
-                timeout: 10000,
-                close: false,
-                overlay: true,
-                displayMode: 'once',
-                id: 'question',
-                zindex: 999,
-                title: "Ajouter",
-                message: 'Voulez-vous ajouter cette catégorie ?',
-                position: 'center',
-                buttons: [
-                    ['<button><b>OUI</b></button>', function (instance, toast) {
-                
-                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
-
-                        $.ajax({
-                            url: "/contenu/add",
-                            method: "POST",
-                            data: formData,
-                            dataType: "JSON",
-                            success: function(data){
-                            }
-                        })
-                    }, true],
-                    ['<button>NON</button>', function (instance, toast) {
-                
-                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
-    
-                    }],
-                ]
-            });
-        })
     }
 }
 

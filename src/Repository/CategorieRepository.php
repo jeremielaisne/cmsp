@@ -27,6 +27,7 @@ class CategorieRepository extends ServiceEntityRepository
                 FROM categorie AS c
                 LEFT JOIN zone AS z ON c.zone_id = z.id
                 WHERE c.is_active = 1 AND z.siteweb = :siteweb
+                -- ORDER BY c.order
                 ";
         
         $stmt = $conn->prepare($sql);

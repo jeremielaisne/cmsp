@@ -7,8 +7,9 @@ use App\Entity\Champ;
 use App\Entity\Zone;
 
 use App\Form\CategorieType;
-
+use App\Helper\Slugify;
 use DateTime;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -57,6 +58,9 @@ class CategorieController extends AbstractController
         if($request->isXmlHttpRequest()) 
         {
             $categorie->setLibelle($request->get("libelle"));
+
+            $slug = Slugify::index($request->get("libelle"));
+            $categorie->setSlug($slug);
             $categorie->setDescription($request->get("description"));
             
             $champs = $request->get("champ");
@@ -103,7 +107,12 @@ class CategorieController extends AbstractController
         {
             $obj_zone = $this->getDoctrine()->getRepository(Zone::class)->find($zone);
             $categorie = $this->getDoctrine()->getRepository(Categorie::class)->find($id);
+
             $categorie->setLibelle($libelle);
+
+            $slug = Slugify::index($libelle);
+            $categorie->setSlug($slug);
+
             $categorie->setDescription($description);
             $categorie->setZone($obj_zone);
             $categorie->setUpdatedAt(new DateTime());

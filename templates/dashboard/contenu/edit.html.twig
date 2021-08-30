@@ -1,0 +1,27 @@
+{% extends 'index.html.twig' %}
+
+{% block contenu %}
+<!--begin::Container-->
+<div id="kt_content_container_edit" class="container">
+    <!--begin::About card-->
+    <div class="card p-10 border mb-5">
+        
+        <h4 class="mb-10">Edition d'un contenu</h4>
+		<!--begin::Body-->
+        {# templates/dashboard/add-categorie.html.twig #}
+        {{ form_start(form) }}
+
+            {{ form_errors(form) }}
+        
+        {{ form_rest(form) }}
+
+        <div class="d-flex flex-row-reverse">
+            <button class="btn btn-success p-3 m-2 fs-8">Valider</button>
+            <a href="{{path('contenu_index')}}" class="btn btn-danger p-3 m-2 fs-8">Retour</a>
+        </div>
+        <!--end::Body-->
+    </div>
+    <!--end::About card-->
+</div>
+<!--end::Container-->
+{% endblock %}

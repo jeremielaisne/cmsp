@@ -35,13 +35,9 @@ class Contenu
     private $langue;
 
     /**
-     * @Assert\Choice(
-     *     choices = {"titre", "sous-titre", "texte", "url", "liste", "illustration"},
-     *     message = "Choisi un type correct parmis la liste."
-     * )
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="array")
      */
-    private $type;
+    private $type = [];
 
      /**
      * @Assert\Json(
@@ -60,6 +56,11 @@ class Contenu
      * @ORM\Column(type="boolean")
      */
     private $isActive = true;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $order = 0;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="categorie")
@@ -132,6 +133,18 @@ class Contenu
     public function setIsActive($isActive)
     {
         $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    public function setOrder($order)
+    {
+        $this->order = $order;
 
         return $this;
     }

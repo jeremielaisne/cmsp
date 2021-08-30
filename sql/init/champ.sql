@@ -21,8 +21,4 @@ VALUES(4, 'Url');
 
 INSERT INTO cmsp.champ
 (id, libelle)
-VALUES(5, 'Liste');
-
-INSERT INTO cmsp.champ
-(id, libelle)
-VALUES(6, 'Illustration');
+VALUES(5, 'Illustration');

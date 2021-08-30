@@ -28,9 +28,14 @@ class Categorie
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $libelle;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $slug;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -41,6 +46,11 @@ class Categorie
      * @ORM\Column(type="boolean")
      */
     private $isActive = true;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $order = 0;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Contenu", mappedBy="categorie")
@@ -81,6 +91,18 @@ class Categorie
         return $this;
     }
 
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
     public function getDescription()
     {
         return $this->description;
@@ -101,6 +123,18 @@ class Categorie
     public function setIsActive($isActive)
     {
         $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    public function setOrder($order)
+    {
+        $this->order = $order;
 
         return $this;
     }
