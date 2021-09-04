@@ -48,11 +48,6 @@ class Categorie
     private $isActive = true;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $order = 0;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Contenu", mappedBy="categorie")
      */
     private $contenus;
@@ -127,17 +122,17 @@ class Categorie
         return $this;
     }
 
-    public function getOrder()
-    {
-        return $this->order;
-    }
+    // public function getOrder()
+    // {
+    //     return $this->order;
+    // }
 
-    public function setOrder($order)
-    {
-        $this->order = $order;
+    // public function setOrder($order)
+    // {
+    //     $this->order = $order;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * @return Collection|Contenu[]

@@ -36,6 +36,10 @@ class Contenu {
         // Ajouter un contenu
         // --------------------
         this.addContenu()
+
+        // Changer de site
+        // --------------------
+        this.changeSite()
     }
 
     initModal() {
@@ -51,6 +55,32 @@ class Contenu {
             awaitCloseAnimation: false,
             debugMode: false
         });
+    }
+
+    changeSite() {
+        $("#select_sites").on("change", function(e){
+
+            var formData = {
+                site: $(this).val()
+            };
+            $.ajax({
+                url: "/dashboard/contenu/",
+                method: "POST",
+                data: formData,
+                dataType: "JSON",
+                success: function(data){
+                    if (data == true) {
+                        iziToast.info({
+                            timeout: 500, 
+                            icon: 'fas fa-check', 
+                            title: 'OK', 
+                            message: 'Changement de site !'
+                        });
+                        setTimeout(function(){location.reload()}, 500)
+                    }
+                }
+            })
+        })
     }
 
     closeModal() {

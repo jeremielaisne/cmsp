@@ -29,13 +29,17 @@
             <tbody>
                 {% if categories is empty %}
                     <tr>
-                        <td colspan='4' class="text-center">Tableau vide !</td>
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
+                        <td class="text-center">Tableau vide !</td>
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
                     </tr>
                 {% endif %}
                 {% for categorie in categories %}
                 <tr>
                     <td data-search="{{categorie.libelle}}"><input value="{{categorie.libelle}}" class="edit_categorie_libelle border-0 bg-transparent w-100" readonly/><a class="btn btn-success p-2 fs-9 mt-1" href="{{ path('contenu_add',{'id':categorie.id})}}"><i class="fas fa-plus"></i> Ajouter du contenu</a></td>
-                    <td data-search="{{categorie.zone_page}}"><select class="edit_categorie_zone_page select-dropdown bg-transparent font-weight-bold">{% for zone in zones %}<option data-id="{{zone.id}}" {% if zone.id == categorie.zone_id %}selected{% else %}disabled{% endif %}>{{zone.page}} - {{zone.libelle}}</option>{% endfor %}</select></td>
+                    <td data-search="{{categorie.zone_page}}"><select class="edit_categorie_zone_page select-dropdown bg-transparent font-weight-bold">{% for zone in zones %}<option data-id="{{zone.id}}" {% if zone.id == categorie.zone_id %} selected {% else %}disabled{% endif %}>{{zone.page}} - {{zone.libelle}}</option>{% endfor %}</select></td>
                     <td><textarea class="edit_categorie_description border-0 bg-transparent fs-9 w-100" readonly/>{{categorie.description}}</textarea></td>
                     <td data-search="{% for cat in categorie.champs %}{{cat.libelle}}{% endfor %}">{% for cat in categorie.champs %}<span {% if cat.id == "1" %}class="edit_categorie_champ badge badge-dark"{% elseif cat.id == "5" %}class="edit_categorie_champ badge badge-info"{% else %}class="edit_categorie_champ badge badge-secondary"{% endif %}>{{cat.libelle}}</span> {% endfor %}</td>
                     <td>
@@ -56,7 +60,7 @@
 </div>
 <!--end::Container-->
 
-{% include './objects/modal.html.twig' with {'modal_path':'/categorie/add', 'modal_height':'483', 'action': 'add'} %}
+{% include './objects/modal.html.twig' with {'modal_path':'/dashboard/categorie/add', 'modal_height':'483', 'action': 'add'} %}
 
 {% endblock %}
 

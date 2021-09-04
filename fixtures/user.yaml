@@ -1,0 +1,10 @@
+# fixtures/users.yaml
+
+App\Entity\User:
+    user_{1..10}:
+        username: <username()>
+        lastname: <lastname()>
+        firstname: <firstname()>
+        password: <setPassword()>
+        email: <email()>
+        roles: <setRoles()>

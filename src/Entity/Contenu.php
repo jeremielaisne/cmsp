@@ -58,12 +58,7 @@ class Contenu
     private $isActive = true;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $order = 0;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="categorie")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="contenus")
      */
     private $categorie;
 
@@ -137,17 +132,17 @@ class Contenu
         return $this;
     }
 
-    public function getOrder()
-    {
-        return $this->order;
-    }
+    // public function getOrder()
+    // {
+    //     return $this->order;
+    // }
 
-    public function setOrder($order)
-    {
-        $this->order = $order;
+    // public function setOrder($order)
+    // {
+    //     $this->order = $order;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getCategorie(): ?Categorie
     {

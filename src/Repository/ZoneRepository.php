@@ -25,7 +25,7 @@ class ZoneRepository extends ServiceEntityRepository
 
         $sql = "SELECT id, libelle, page, url
                 FROM zone
-                WHERE active = 1 AND siteweb = :siteweb
+                WHERE active = 1 AND siteweb_id = :siteweb
                 ";
         
         $stmt = $conn->prepare($sql);

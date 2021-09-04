@@ -109,14 +109,14 @@ class ContenuType extends AbstractType
                             ]);
                             break;
                         case ContenuEnum::Illustration:
-                            $illustration = null;
-                            empty($edit_contenu->{'illustration'}) ?: $illustration = $edit_contenu->{'illustration'};
+                            //$illustration = null;
+                            //empty($edit_contenu->{'illustration'}) ?: $illustration = $edit_contenu->{'illustration'};
                             $form->add('illustration', FileType::class, [
                                 'attr' => ['class' => 'contenu-illustration mb-5'],
                                 'label' => 'Illustration',
                                 'required' => false,
-                                'mapped' => false,
-                                'data' => $illustration               
+                                'mapped' => false
+                                //'data' => $illustration               
                             ]);
                             break;
                     }

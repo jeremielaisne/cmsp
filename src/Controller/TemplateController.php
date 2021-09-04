@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/template", name="template_")
+ * @Route("/dashboard/template", name="template_")
 */
 class TemplateController extends AbstractController
 {

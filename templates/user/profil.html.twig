@@ -1,0 +1,35 @@
+{% extends 'index.html.twig' %}
+
+{% block stylesheet %}
+{% endblock %}
+
+{% block contenu %}
+<!--begin::Container-->
+<div id="kt_content_container" class="container">
+    <!--begin::About card-->
+    <div class="card p-10">
+		<!--begin::Body-->
+        <div class="row">
+            <h3>Utilisateur</h3>
+        </div>
+        <div class="row">
+
+        Surnom : {{ user.username }}
+        Avatar : {{ user.avatar }}
+        Nom : {{ user.lastname }}
+        Prénom : {{ user.firstname }}
+        Date de naissance : {{ user.dateNaissance|date("d/m/Y") }}
+        Adresse : {{ user.adresse }}
+        Fonction : {{ user.fonction }}
+        </div>
+        <!--end::Body-->
+    </div>
+    <!--end::About card-->
+</div>
+<!--end::Container-->
+
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Categorie;
 use App\Entity\Contenu;
+use App\Entity\Siteweb;
 use App\Form\ContenuType;
 
 use DateTime;
@@ -13,20 +14,52 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 /**
- * @Route("/contenu", name="contenu_")
+ * @Route("/dashboard/contenu", name="contenu_")
 */
 class ContenuController extends AbstractController
 {
     /**
-     * @Route("/index", name="index")
+     * @var Security
      */
-    public function index()
+    private $security;
+
+    public function __construct(Security $security) 
+    {
+        $this->security = $security;
+    }
+
+    /**
+     * @Route("/", name="index")
+     */
+    public function index(Request $request)
     {
         $page = "contenu";
         $title = "Gestion des contenus";
-        $site = "testweb";
+        $routeName = $request->getPathInfo();
+        $breadcrumb = array_filter(explode("/", $routeName));
+
+        try {
+            $site = $this->security->getUser()->getDernierSite()->getId();
+        } catch (Error $e){
+            $site = null;
+        }
+
+        if($request->isXmlHttpRequest()) 
+        {
+            $site = $request->get("site");
+            $user = $this->security->getUser();
+            $obj_site = $this->getDoctrine()->getRepository(Siteweb::class)->findOneBy(["nom" => $site]);
+            $user->setDernierSite($obj_site);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            return new JsonResponse(true);
+        }
 
         $contenus = [];
         $liste_contenus = $this->getDoctrine()->getRepository(Contenu::class)->findBySites($site);
@@ -42,7 +75,9 @@ class ContenuController extends AbstractController
 
         return $this->render("dashboard/contenu/index.html.twig", [
             "page" => $page,
+            "breadcrumb" => $breadcrumb,
             "title" => $title,
+            "user" => $this->security->getUser(),
             "contenus" => $contenus
         ]);
     }
@@ -54,6 +89,9 @@ class ContenuController extends AbstractController
     {
         $page = "contenu";
         $title = "Gestion de contenus";
+        $routeName = $request->getPathInfo();
+        $breadcrumb = array_filter(explode("/", $routeName));
+
         $site = "testweb";
         $id = $request->get('id');
 
@@ -87,7 +125,9 @@ class ContenuController extends AbstractController
 
         return $this->render("dashboard/contenu/add.html.twig", [
             "page" => $page,
+            "breadcrumb" => $breadcrumb,
             "title" => $title,
+            "user" => $this->security->getUser(),
             "contenus" => $contenus,
             "form" => $form->createView()
         ]);
@@ -99,6 +139,9 @@ class ContenuController extends AbstractController
     public function edit(Request $request) : Response
     {
         $page = "contenu";
+        $routeName = $request->getPathInfo();
+        $breadcrumb = array_filter(explode("/", $routeName));
+        
         $title = "Gestion de contenus";
         $id = $request->get('id');
 
@@ -120,6 +163,7 @@ class ContenuController extends AbstractController
 
         return $this->render("dashboard/contenu/edit.html.twig", [
             "page" => $page,
+            "breadcrumb" => $breadcrumb,
             "title" => $title,
             "form" => $form->createView()
         ]);
@@ -130,7 +174,7 @@ class ContenuController extends AbstractController
      */
     public function delete()
     {
-        $page = "app";
+        $page = "contenu";
         $title = "Dashboard - Suppression de contenus";
 
         return $this->render("dashboard/contenu/delete.html.twig", [

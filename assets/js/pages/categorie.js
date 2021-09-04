@@ -47,6 +47,9 @@ class Categorie {
         // --------------------
         this.deleteCategorie()
 
+        // Changer de site
+        // --------------------
+        this.changeSite()
 
         // Init select2
         // --------------------
@@ -73,6 +76,32 @@ class Categorie {
             $('.select2-enable').select2({
                 placeholder: 'Selectionnez une option'
             });
+        })
+    }
+
+    changeSite() {
+        $("#select_sites").on("change", function(e){
+
+            var formData = {
+                site: $(this).val()
+            };
+            $.ajax({
+                url: "/dashboard/categorie/",
+                method: "POST",
+                data: formData,
+                dataType: "JSON",
+                success: function(data){
+                    if (data == true) {
+                        iziToast.info({
+                            timeout: 500, 
+                            icon: 'fas fa-check', 
+                            title: 'OK', 
+                            message: 'Changement de site !'
+                        });
+                        setTimeout(function(){location.reload()}, 500)
+                    }
+                }
+            })
         })
     }
 
@@ -121,7 +150,7 @@ class Categorie {
                         instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
 
                         $.ajax({
-                            url: "/categorie/add",
+                            url: "/dashboard/categorie/add",
                             method: "POST",
                             data: formData,
                             dataType: "JSON",
@@ -257,7 +286,7 @@ class Categorie {
                         instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
 
                         $.ajax({
-                            url: "/categorie/edit",
+                            url: "/dashboard/categorie/edit",
                             data : {"id":id, "libelle":libelle, "zone":zone, "description":description},
                             method: "POST",
                             dataType: "JSON",
@@ -304,7 +333,7 @@ class Categorie {
                 
                         instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
                         $.ajax({
-                            url: "/categorie/delete",
+                            url: "/dashboard/categorie/delete",
                             data : { "id": id },
                             method: "POST",
                             dataType: "JSON",

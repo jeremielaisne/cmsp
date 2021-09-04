@@ -50,13 +50,6 @@ class Zone
     private $url;
 
     /**
-     * @var string $siteweb
-     * 
-     * @ORM\Column(name="siteweb", length=255, type="string")
-     */
-    private $siteweb;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $active = true;
@@ -65,6 +58,11 @@ class Zone
      * @ORM\OneToMany(targetEntity="App\Entity\Categorie", mappedBy="zone")
      */
     private $categories;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Siteweb", inversedBy="zones")
+     */
+    private $siteweb;
 
 
     public function __construct()
@@ -158,5 +156,17 @@ class Zone
     public function getCategories(): Collection
     {
         return $this->categories;
+    }
+
+    public function getZone(): ?Zone
+    {
+        return $this->zone;
+    }
+
+    public function setZone(?Zone $zone): self
+    {
+        $this->zone = $zone;
+
+        return $this;
     }
 }

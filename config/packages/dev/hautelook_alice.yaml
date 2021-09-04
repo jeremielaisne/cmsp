@@ -1,0 +1,6 @@
+hautelook_alice:
+    fixtures_path: fixtures
+    root_dirs:
+        - '%kernel.build_dir%'
+        - '%kernel.project_dir%'
+        - '%kernel.cache_dir%'

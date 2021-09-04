@@ -20,6 +20,11 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
             - '../src/Tests/'
+    
+    App\DataFixtures\Provider\UserProvider: 
+        tags: [ { name: nelmio_alice.faker.provider } ]
+
+    Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider: ~
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

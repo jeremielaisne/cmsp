@@ -27,7 +27,7 @@ class ContenuRepository extends ServiceEntityRepository
                 FROM contenu AS ct
                 LEFT JOIN categorie AS c ON ct.categorie_id = c.id
                 LEFT JOIN zone AS z ON c.zone_id = z.id
-                WHERE c.is_active = 1 AND z.siteweb = :siteweb
+                WHERE c.is_active = 1 AND z.siteweb_id = :siteweb
                 -- ORDER BY c.order, ct.order
                 ";
         
@@ -47,7 +47,7 @@ class ContenuRepository extends ServiceEntityRepository
                 FROM contenu AS ct
                 LEFT JOIN categorie AS c ON ct.categorie_id = c.id
                 LEFT JOIN zone AS z ON c.zone_id = z.id
-                WHERE c.is_active = 1 AND z.siteweb = :siteweb AND ct.categorie_id = :categorie
+                WHERE c.is_active = 1 AND z.siteweb_id = :siteweb AND ct.categorie_id = :categorie
                 -- ORDER BY c.order, ct.order
                 ";
         

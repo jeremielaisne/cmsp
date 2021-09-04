@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/seo", name="seo_")
+ * @Route("/dashboard/seo", name="seo_")
 */
 class SEOController extends AbstractController
 {

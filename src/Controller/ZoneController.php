@@ -2,36 +2,73 @@
 
 namespace App\Controller;
 
+use App\Entity\Siteweb;
 use App\Entity\Zone;
 
 use App\Form\ZoneType;
 
 use DateTime;
+use Error;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 /**
- * @Route("/zone", name="zone_")
+ * @Route("/dashboard/zone", name="zone_")
 */
 class ZoneController extends AbstractController
 {
     /**
-     * @Route("/index", name="index")
+     * @var Security
      */
-    public function index()
+    private $security;
+
+    public function __construct(Security $security) 
+    {
+        $this->security = $security;
+    }
+
+
+    /**
+     * @Route("/", name="index")
+     */
+    public function index(Request $request)
     {
         $page = "zone";
         $title = "Gestion des Zones";
-        $sites = "testweb";
+        $routeName = $request->getPathInfo();
+        $breadcrumb = array_filter(explode("/", $routeName));
 
-        $zones = $this->getDoctrine()->getRepository(Zone::class)->findBySites($sites);
+        try {
+            $site = $this->security->getUser()->getDernierSite()->getId();
+        } catch (Error $e){
+            $site = null;
+        }
+
+        if($request->isXmlHttpRequest()) 
+        {
+            $site = $request->get("site");
+            $user = $this->security->getUser();
+            $obj_site = $this->getDoctrine()->getRepository(Siteweb::class)->findOneBy(["nom" => $site]);
+            $user->setDernierSite($obj_site);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            return new JsonResponse(true);
+        }
+
+        $zones = $this->getDoctrine()->getRepository(Zone::class)->findBySites($site);
 
         return $this->render("dashboard/zone/index.html.twig", [
             "page" => $page,
+            "breadcrumb" => $breadcrumb,
             "title" => $title,
+            "user" => $this->security->getUser(),
             "zones" => $zones
         ]);
     }
@@ -43,6 +80,8 @@ class ZoneController extends AbstractController
     {
         $page = "zone";
         $title = "Gestion des Zones";
+        $routeName = $request->getPathInfo();
+        $breadcrumb = array_filter(explode("/", $routeName));
 
         $zone = new Zone();
 
@@ -93,7 +132,9 @@ class ZoneController extends AbstractController
 
         return $this->render("dashboard/zone/add.html.twig", [
             "page" => $page,
+            "breadcrumb" => $breadcrumb,
             "title" => $title,
+            "user" => $this->security->getUser(),
             "form" => $form->createView()
         ]);
     }

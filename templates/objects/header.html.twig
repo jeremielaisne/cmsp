@@ -5,24 +5,48 @@
 		<div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-2 mb-5 mb-lg-0" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_container'}">
 			<!--begin::Heading-->
 			<h1 class="text-dark fw-bolder mt-1 mb-1 fs-2">{{ title }}</h1>
+            <ul class="breadcrumb fw-bold fs-base mb-1">
+				{# <li class="breadcrumb-item text-muted">
+					<a href="{{ path('dashboard_index') }}" class="text-muted text-hover-primary">Accueil</a>
+				</li> #}
+                {% if breadcrumb is defined and breadcrumb is not null %}
+                    {% for link in breadcrumb %}
+                        {% if loop.last %}
+                            <li class="breadcrumb-item text-dark">{{ link|capitalize }}</li>
+                        {% else %}
+                            <li class="breadcrumb-item text-muted">
+                                <a href="/{{link}}" class="text-muted text-hover-primary">{{ link|capitalize }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                <li class="breadcrumb-item text-dark">
+					Accueil
+				</li>
+                {% endif %}
+			</ul>
 			<!--end::Heading-->
 		</div>
 		<!--end::Page title=-->
-		<!--begin::Logo bar-->
-		<div class="d-flex d-lg-none align-items-center flex-grow-1">
-
-		</div>
-		<!--end::Logo bar-->
-		<!--begin::Toolbar wrapper-->
-		<div class="d-flex align-items-stretch flex-shrink-0">
-	
-		</div>
-		<!--end::Toolbar wrapper-->
 		<!--begin::User-->
 		<div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
+            <div class="btn btn-icon btn-active-light-primary position-relative w-100">
+				<select id="select_sites" class="select-2 form-control">
+                {% if user.sitewebs is defined %}
+                    {% for siteweb in user.sitewebs %}
+                    <option data-id="1" name="{{siteweb}}" {% if user.dernierSite is defined %}{% if user.dernierSite == siteweb %}selected{% endif %}{% endif %}>{{siteweb}}</option>
+                    {% endfor %}
+                {% endif %}
+                </select>
+			</div>
+            <div class="p-5">
+			</div>
+            <div class="btn btn-icon btn-active-light-primary position-relative w-30px h-30px w-md-40px h-md-40px">
+				<span class="bullet bullet-dot bg-success h-6px w-6px position-absolute translate-middle top-0 start-50 animation-blink"></span>
+			</div>
 			<!--begin::Menu wrapper-->
 			<div class="cursor-pointer symbol symbol-circle symbol-30px symbol-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
-				<img alt="Pic" src="#">
+				{% if user.avatar is defined %}<img alt="Pic" src="{{asset(user.avatar)}}">{% else %}<span>AVATAR</span>{% endif %}
 			</div>
 			<!--begin::Menu-->
 			<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold py-4 fs-6 w-275px" data-kt-menu="true">
@@ -31,16 +55,26 @@
                     <div class="menu-content d-flex align-items-center px-3">
                         <!--begin::Avatar-->
                         <div class="symbol symbol-50px symbol-circle me-5">
-                            <img alt="Logo" src="#">
+                            {% if user.avatar is defined %}<img alt="Logo" src="{{asset(user.avatar)}}">{% else %}<span>AVATAR</span>{% endif %}
                         </div>
                         <!--end::Avatar-->
                         <!--begin::Username-->
+                        {% if user is defined %}
                         <div class="d-flex flex-column">
-                            <div class="fw-bolder d-flex align-items-center fs-5">Nom prénom
-                                <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">TEST</span>
+                            <div class="fw-bolder d-flex align-items-center fs-5">{% if user.firstname is defined and user.lastname is defined %}{{user.firstname}} {{user.lastname}}{% endif %}
+                            {% if user.roles is defined %}
+                            {% for role in user.roles %}
+                                {% if role == "ROLE_ADMIN" %}
+                                <span class="badge badge-light-danger fw-bolder fs-8 px-2 py-1 ms-2">ADMIN</span>
+                                {% elseif role == "ROLE_USER" %}
+                                <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">USER</span>
+                                {% endif %}
+                            {% endfor %}
+                            {% endif %}
                             </div>
-                            <a href="#" class="fw-bold text-muted text-hover-primary fs-7">test@live.com</a>
+                            <a href="#" class="fw-bold text-muted text-hover-primary fs-7">{% if user.email is defined %}{{user.email}}{% endif %}</a>
                         </div>
+                        {% endif %}
                         <!--end::Username-->
                     </div>
                 </div>
@@ -50,12 +84,12 @@
                 <!--end::Menu separator-->
                 <!--begin::Menu item-->
                 <div class="menu-item px-5 my-1">
-                    <a href="#" class="menu-link px-5">Parametres</a>
+                    <a href="{{ path('user_profil') }}" class="menu-link px-5">Profil</a>
                 </div>
                 <!--end::Menu item-->
                 <!--begin::Menu item-->
                 <div class="menu-item px-5">
-                    <a href="#" class="menu-link px-5">Se désinscrire</a>
+                    <a href="{{ path('logout') }}" class="menu-link px-5">Déconnexion</a>
                 </div>
                 <!--end::Menu item-->
             </div>

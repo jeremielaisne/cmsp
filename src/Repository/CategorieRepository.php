@@ -26,7 +26,7 @@ class CategorieRepository extends ServiceEntityRepository
         $sql = "SELECT c.id, c.libelle, c.description, z.id as zone_id, z.libelle as zone_libelle, z.page as zone_page
                 FROM categorie AS c
                 LEFT JOIN zone AS z ON c.zone_id = z.id
-                WHERE c.is_active = 1 AND z.siteweb = :siteweb
+                WHERE c.is_active = 1 AND z.siteweb_id = :siteweb
                 -- ORDER BY c.order
                 ";
         

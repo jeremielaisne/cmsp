@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/slider", name="slider_")
+ * @Route("/dashboard/slider", name="slider_")
 */
 class SliderController extends AbstractController
 {

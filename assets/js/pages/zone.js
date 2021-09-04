@@ -48,6 +48,10 @@ class Zone {
         // Slugifier une adresse
         // --------------------
         this.slugifyZone()
+
+        // Changer de site
+        // --------------------
+        this.changeSite()
     }
 
     initModal() {
@@ -109,7 +113,7 @@ class Zone {
                         instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
 
                         $.ajax({
-                            url: "/zone/add",
+                            url: "/dashboard/zone/add",
                             method: "POST",
                             data: formData,
                             dataType: "JSON",
@@ -216,7 +220,7 @@ class Zone {
                         instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
 
                         $.ajax({
-                            url: "/zone/edit",
+                            url: "/dashboard/zone/edit",
                             data : {"id":id, "libelle":libelle, "page":page, "url":url},
                             method: "POST",
                             dataType: "JSON",
@@ -264,7 +268,7 @@ class Zone {
                 
                         instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
                         $.ajax({
-                            url: "/zone/delete",
+                            url: "/dashboard/zone/delete",
                             data : { "id": id },
                             method: "POST",
                             dataType: "JSON",
@@ -291,6 +295,32 @@ class Zone {
                     }],
                 ]
             });
+        })
+    }
+
+    changeSite() {
+        $("#select_sites").on("change", function(e){
+
+            var formData = {
+                site: $(this).val()
+            };
+            $.ajax({
+                url: "/dashboard/contenu/",
+                method: "POST",
+                data: formData,
+                dataType: "JSON",
+                success: function(data){
+                    if (data == true) {
+                        iziToast.info({
+                            timeout: 500, 
+                            icon: 'fas fa-check', 
+                            title: 'OK', 
+                            message: 'Changement de site !'
+                        });
+                        setTimeout(function(){location.reload()}, 500)
+                    }
+                }
+            })
         })
     }
 

@@ -27,7 +27,12 @@
             </thead>
             <tbody>
                 {% if zones is empty %}
-                    <tr><td colspan='4' class="text-center">Le contenu du tableau est vide !<td></tr>
+                    <tr>
+                        <td class="text-center"></td>
+                        <td class="text-center">Le contenu du tableau est vide !</td>
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
+                    </tr>
                 {% endif %}
                 {% for zone in zones %}
                 <tr>
@@ -52,7 +57,7 @@
 </div>
 <!--end::Container-->
 
-{% include './objects/modal.html.twig' with {'modal_path':'/zone/add', 'modal_height':'483', 'action': 'add'} %}
+{% include './objects/modal.html.twig' with {'modal_path':'/dashboard/zone/add', 'modal_height':'483', 'action': 'add'} %}
 
 {% endblock %}
 

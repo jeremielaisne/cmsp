@@ -4,39 +4,75 @@ namespace App\Controller;
 
 use App\Entity\Categorie;
 use App\Entity\Champ;
+use App\Entity\Siteweb;
 use App\Entity\Zone;
 
 use App\Form\CategorieType;
 use App\Helper\Slugify;
 use DateTime;
-
+use Error;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 /**
- * @Route("/categorie", name="categorie_")
+ * @Route("/dashboard/categorie", name="categorie_")
 */
 class CategorieController extends AbstractController
 {
     /**
-     * @Route("/index", name="index")
+     * @var Security
      */
-    public function index()
+    private $security;
+
+    public function __construct(Security $security) 
+    {
+        $this->security = $security;
+    }
+
+    /**
+     * @Route("/", name="index")
+     */
+    public function index(Request $request)
     {
         $page = "categorie";
-        $title= "Gestion des categories";
-        $sites = "testweb";
+        $routeName = $request->getPathInfo();
+        $breadcrumb = array_filter(explode("/", $routeName));
 
-        $categories = $this->getDoctrine()->getRepository(Categorie::class)->findBySites( $sites);
+        $title = "Gestion des categories";
 
-        $zones =  $this->getDoctrine()->getRepository(Zone::class)->findBySites($sites);
+        try {
+            $site = $this->security->getUser()->getDernierSite()->getId();
+        } catch (Error $e){
+            $site = null;
+        }
+
+        if($request->isXmlHttpRequest()) 
+        {
+            $site = $request->get("site");
+            $user = $this->security->getUser();
+            $obj_site = $this->getDoctrine()->getRepository(Siteweb::class)->findOneBy(["nom" => $site]);
+            $user->setDernierSite($obj_site);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            return new JsonResponse(true);
+        }
+
+        $categories = $this->getDoctrine()->getRepository(Categorie::class)->findBySites($site);
+
+        $zones =  $this->getDoctrine()->getRepository(Zone::class)->findBySites($site);
 
         return $this->render("dashboard/categorie/index.html.twig", [
-            "page" => $page, 
+            "page" => $page,
+            "breadcrumb" => $breadcrumb,
             "title" => $title,
+            "user" => $this->security->getUser(),
             "categories" => $categories,
             "zones" => $zones
         ]);
@@ -49,6 +85,8 @@ class CategorieController extends AbstractController
     {
         $page = "categorie";
         $title = "Dashboard - Ajout d'une categorie";
+        $routeName = $request->getPathInfo();
+        $breadcrumb = array_filter(explode("/", $routeName));
 
         $categorie = new Categorie();
 
@@ -88,7 +126,9 @@ class CategorieController extends AbstractController
 
         return $this->render("dashboard/categorie/add.html.twig", [
             "page" => $page,
+            "breadcrumb" => $breadcrumb,
             'title'=> $title,
+            "user" => $this->security->getUser(),
             "form" => $form->createView()
         ]);
     }

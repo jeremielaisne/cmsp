@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DocumentationController extends AbstractController
 {
     /**
-     * @Route("/document", name="dashboard_index")
+     * @Route("/dashboard/document", name="dashboard_index")
      */
     public function index()
     {
