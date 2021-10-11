@@ -26,12 +26,12 @@ class Siteweb
     private $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Siteweb", mappedBy="siteweb")
+     * @ORM\OneToMany(targetEntity="App\Entity\Zone", mappedBy="siteweb")
      */
     private $zones;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Siteweb", mappedBy="dernier_site")
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="dernier_site")
      */
     private $sitewebs;
 

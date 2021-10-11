@@ -1,0 +1,18 @@
+# api/config/serializer/Contenu.yaml
+
+App\Entity\Contenu:
+    attributes: 
+        id:
+            groups: ['get']
+        langue:
+            groups: ['get']
+        type:
+            groups: ['get']
+        contenu:
+            groups: ['get']
+        isOnline:
+            groups: ['get']
+        isActive:
+            groups: ['get']
+        categorie:
+            groups: ['post']

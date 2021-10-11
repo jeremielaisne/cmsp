@@ -32,12 +32,12 @@ class User implements UserInterface, \Serializable
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=25, unique=true)
+     * @ORM\Column(type="string", length=25)
      */
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=25, unique=true)
+     * @ORM\Column(type="string", length=25)
      */
     private $firstname;
 
@@ -107,7 +107,7 @@ class User implements UserInterface, \Serializable
     private $detail_modifications;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Siteweb", inversedBy="users")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Siteweb", inversedBy="sitewebs")
      */
     private $dernier_site;
 
